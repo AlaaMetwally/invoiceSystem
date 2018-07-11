@@ -16,7 +16,8 @@ class CreateAdjustmentsTable extends Migration
         Schema::create('adjustments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name')->nullable();
-            $table->integer('user_id')->nullable();
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->integer('admin_show')->default(0);
             $table->timestamps();
         });

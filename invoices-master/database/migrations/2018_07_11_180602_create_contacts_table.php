@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateContactTable extends Migration
+class CreateContactsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -20,7 +20,8 @@ class CreateContactTable extends Migration
             $table->string('title')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
-            $table->integer('client_id')->nullable();
+            $table->integer('client_id')->unsigned()->nullable();
+            $table->foreign('client_id')->references('id')->on('clients');
             $table->integer('admin_show')->default(0);
             $table->timestamps();
         });
@@ -36,5 +37,5 @@ class CreateContactTable extends Migration
         //
         Schema::dropIfExists('contacts');
     }
-
 }
+
