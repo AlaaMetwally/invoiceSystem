@@ -181,8 +181,6 @@ return [
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Codemash\Socket\SocketServiceProvider::class,
-
-
     ],
 
     /*

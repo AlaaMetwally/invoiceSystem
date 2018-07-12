@@ -39,6 +39,16 @@ Route::group(['middleware' => ['auth'], 'prefix' => "log", 'as' => "log."], func
     Route::get('/', ['uses' => 'logController@index'])->name('index');
     /*--routes@@log*/
 });
+//crud operations on the Adjustments
+Route::get('/adjustments','AdjustmentController@index')->name('adjustments');
+
+Route::get('/adjustments/{id}/edit','AdjustmentController@edit')->name('adjustments.edit');
+Route::post('/adjustments/{id}/update', 'AdjustmentController@update')->name('adjustments.update');
+Route::get('/adjustments/create','AdjustmentController@create')->name('adjustments.create');
+Route::get('/adjustments/show/{id}','AdjustmentController@show')->name('adjustments.show');
+Route::post('/adjustments','AdjustmentController@store')->name('adjustments.store');
+Route::delete('/adjustments/{id}','AdjustmentController@destroy');
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

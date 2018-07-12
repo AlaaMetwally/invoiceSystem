@@ -9,6 +9,7 @@
         "anhskohbo/no-captcha": "^2.3",
         "codemash/laravel-socket": "^1.0",
         "intervention/image": "^2.4",
+        "jeroennoten/laravel-adminlte": "^1.23",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "lrgt/laravel-form-ajax-validation": "dev-master",
