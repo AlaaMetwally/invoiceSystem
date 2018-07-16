@@ -1,5 +1,8 @@
 $(document).on('ready pjax:success', function () {
-    var table = $('#adjustments-table').DataTable();
+    var table = $('#adjustments-table').DataTable({ "columnDefs": [
+        { "orderable": false,"searchable": false, "targets": 1 }
+      ]});
+    table.search('').draw();
     $(document).on('click', '.deleteRow', function (e) {
         $tr = $(this).parents('tr');
         var id = e.target.id;
