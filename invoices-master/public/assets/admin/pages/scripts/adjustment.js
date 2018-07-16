@@ -1,5 +1,4 @@
-$(document).ready(function () {
-
+$(document).on('ready pjax:success', function () {
     var table = $('#adjustments-table').DataTable();
     $(document).on('click', '.deleteRow', function (e) {
         $tr = $(this).parents('tr');
@@ -14,7 +13,6 @@ $(document).ready(function () {
                 closeOnConfirm: false
             },
             function () {
-                swal("Deleted!", "It is deleted successfully.", "success");
                 $.ajax(
                     {
                         url: "adjustments/" + id,
@@ -24,37 +22,36 @@ $(document).ready(function () {
                             "id": id,
                         },
                         success: function (response) {
+                            swal("Deleted!", "It is deleted successfully.", "success");
                             table.row($tr).remove().draw();
                         },
                         error: function (xhr) {
-                            console.log(xhr.responseText);
+                            swal("Record is related to other recorders in another tables!")
                         }
                     });
             });
-
     });
-
     $('#myForm').ajaxForm({
-        beforeSubmit: function (arr, $form, options) {
-            var i;
-            for (i = 0; i < arr.length; i++) {
-                if(arr[i].name == "name") {
-                  var name = JSON.stringify(arr[i].value);
-                }
-            }
-            var nameRegex = /^"[a-zA-Z0-9]+([a-zA-Z0-9 ])*"$/;
-            var nameResult = nameRegex.test(name);
-            if (nameResult == true) {
-                return true;
-            }
-            else {
-                swal("Please Enter A Correct Adjustment Name");
-                return false;
-            }
-        },
+        beforeSubmit:validateRegex,
         success: function (data) {
             window.location = data.url;
         }
     });
-
 });
+function validateRegex (arr, $form, options) {
+    var i;
+    for (i = 0; i < arr.length; i++) {
+        if (arr[i].name == "name") {
+            var name = JSON.stringify(arr[i].value);
+        }
+    }
+    var nameRegex = /^"[a-zA-Z0-9]+([a-zA-Z0-9 ])*"$/;
+    var nameResult = nameRegex.test(name);
+    if (nameResult == true) {
+        return true;
+    }
+    else {
+        swal("Please Enter A Correct Adjustment Name");
+        return false;
+    }
+}

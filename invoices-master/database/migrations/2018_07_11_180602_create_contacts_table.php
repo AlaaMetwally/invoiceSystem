@@ -21,7 +21,7 @@ class CreateContactsTable extends Migration
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->integer('client_id')->unsigned()->nullable();
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('client_id')->references('id')->on('clients');
             $table->integer('admin_show')->default(0);
             $table->timestamps();
         });

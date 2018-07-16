@@ -17,24 +17,24 @@ class CreateTasksTable extends Migration
             $table->string('po_number')->nullable();
 
             $table->integer('service_id')->unsigned()->nullable();
-            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('service_id')->references('id')->on('services');
 
             $table->integer('client_id')->unsigned()->nullable();
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('client_id')->references('id')->on('clients');
 
             $table->integer('contact_id')->unsigned()->nullable();
-            $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('contact_id')->references('id')->on('contacts');
 
             $table->string('invoice_number')->nullable();
 
             $table->integer('currency_id')->unsigned()->nullable();
-            $table->foreign('currency_id')->references('id')->on('clients')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('currency_id')->references('id')->on('clients');
 
             $table->integer('user_id')->unsigned()->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
 
             $table->integer('unit_id')->unsigned()->nullable();
-            $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('unit_id')->references('id')->on('units');
 
             $table->float('unit_price')->nullable();
             $table->float('amount')->nullable();

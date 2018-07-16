@@ -22,4 +22,4 @@
     </tbody>
 </table>
 
-<a type="submit" class="btn btn-primary pjax_link" href="{{route('adjustments.init')}}" >Add New</a>
+<a type="submit" class="btn btn-primary pjax-link" href="{{route('adjustments.init')}}" >Add New</a>

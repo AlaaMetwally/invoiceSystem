@@ -103,6 +103,7 @@
 			</li>
 			<li class="nav-item m-tabs__item">
 				<a class="nav-link m-tabs__link" data-toggle="tab" href="#m_quick_sidebar_tabs_logs" role="tab">Logs</a>
+				<a class="nav-link m-tabs__link" data-toggle="tab" href="#m_quick_sidebar_tabs_logs" role="tab">Logs</a>
 			</li>
 		</ul>
 		<div class="tab-content">
