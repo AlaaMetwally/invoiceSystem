@@ -11,7 +11,7 @@
         @foreach ($adjustments as $adjustment)
             <tr id="{{$adjustment->id}}">
             <td>{{ $adjustment->name }}</td>
-            <td><a href="{{route('adjustments.edit', $adjustment->id)}}" class="btn btn-warning btn-sm"
+            <td><a href="{{route('adjustment.edit', $adjustment->id)}}" class="btn btn-warning btn-sm"
                    data-id="{{$adjustment->id}}">EDIT <i class="fa fa-edit"></i></a>
                 <button class="deleteRow btn btn-danger btn-sm"
                         id="{{$adjustment->id}}">DELETE <i class="fa fa-trash"></i></button>
@@ -22,4 +22,4 @@
     </tbody>
 </table>
 
-<a type="submit" class="btn btn-primary pjax-link" href="{{route('adjustments.init')}}" >Add New</a>
+<a type="submit" class="btn btn-primary pjax-link" href="{{route('adjustment.init')}}" >Add New</a>

@@ -21,7 +21,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "files", 'as' => "files."], 
     /*--routes@@files*/
 });
 
-Route::group(['middleware' => ['auth', /*'chooseRole'*/] ], function () {
+Route::group(['middleware' => ['auth', /*'chooseRole'*/]], function () {
 
     Route::get('create_token/{token}', 'NotificationController@createToken');
     Route::get('trial', 'NotificationController@trial');
@@ -40,14 +40,14 @@ Route::group(['middleware' => ['auth'], 'prefix' => "log", 'as' => "log."], func
     /*--routes@@log*/
 });
 //crud operations on the Adjustments
-Route::get('/adjustments','AdjustmentController@index')->name('adjustments');
-
-Route::get('/adjustments/{id}/edit','AdjustmentController@edit')->name('adjustments.edit');
-Route::post('/adjustments/{id}/update', 'AdjustmentController@update')->name('adjustments.update');
-Route::get('/adjustments/create','AdjustmentController@init')->name('adjustments.init');
-Route::get('/adjustments/show/{id}','AdjustmentController@show')->name('adjustments.show');
-Route::delete('/adjustments/{id}','AdjustmentController@destroy');
-
+Route::group(['middleware' => ['auth'],'prefix' => "adjustment" , 'as' => "adjustment."], function () {
+    Route::get('/', 'AdjustmentController@index')->name('index');
+    Route::get('{id}/edit', 'AdjustmentController@edit')->name('edit');
+    Route::post('{id}/update', 'AdjustmentController@update')->name('update');
+    Route::get('create', 'AdjustmentController@init')->name('init');
+    Route::get('show/{id}', 'AdjustmentController@show')->name('show');
+    Route::delete('{id}', 'AdjustmentController@destroy');
+});
 /*
 |--------------------------------------------------------------------------
 | Web Routes

@@ -15,7 +15,7 @@ $(document).on('ready pjax:success', function () {
             function () {
                 $.ajax(
                     {
-                        url: "adjustments/" + id,
+                        url: "adjustment/" + id,
                         type: 'delete',
                         dataType: "JSON",
                         data: {

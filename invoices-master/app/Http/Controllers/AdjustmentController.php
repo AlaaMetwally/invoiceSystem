@@ -12,52 +12,44 @@ class AdjustmentController extends Controller
     //
     public function index()
     {
-        $data = [];
+        $data = Adjustment::index();
         $data['partialView'] = 'adjustment.index';
-        //to check if the user created this object or not
-        $adjustments = Adjustment::where('user_id', Auth::id())->get();
-        $data['adjustments'] = $adjustments;
         return view('adjustment.base', $data);
     }
 
     public function init()
-    {//create empty record and redirect to edit to have the view displayed then go to the update to save records
-        $adjust = Adjustment::create(['user_id' => Auth::id()]);
-        $id = $adjust->id;
-        return redirect(route('adjustments.edit', $id));
+    {
+        $id = Adjustment::init();
+        return redirect(route('adjustment.edit', $id));
     }
 
     public function edit($id)
     {
-        $data = [];
-        $adjustment = Adjustment::where('id', $id)
-            ->where('user_id', Auth::id())
-            ->first();
+        $adjustment = Adjustment::findOrFail($id); //check for auth user
+        $data = $adjustment->edit();
         $data['partialView'] = 'adjustment.edit';
-        $data['adjustment'] = $adjustment;
         return view('adjustment.base', $data);
     }
 
     public function update(Request $request, $id)
     {
-        $adjust = Adjustment::where('id', $id)->update(['name' => $request->name]);
+        $adjustment = Adjustment::findOrFail($id);
+        $adjustment->uptodate($request, $id);
         return response()->json([
-            'url' => route('adjustments'),
+            'url' => route('adjustment.index'),
             'success' => 'record has been saved'
         ]);
     }
 
     public function destroy($id)
     {
-        $adjustment = Adjustment::where('id', $id)
-            ->where('user_id', Auth::id())
-            ->first();
-        if (count($adjustment->user_invoices)) {
+        $adjustment = Adjustment::findOrFail($id);
+        $check = $adjustment->deletion($id);
+        if ($check) {
             return response()->json([
                 'error' => 'Record is related to other recorders in another tables!'
             ]);
         } else {
-            Adjustment::destroy($id);
             return response()->json([
                 'success' => 'Record has been deleted successfully!'
             ]);
