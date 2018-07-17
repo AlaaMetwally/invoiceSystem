@@ -59,7 +59,7 @@ class Adjustment extends Model
     }
 
     public function uptodate($request, $id)
-    {//admin_show =1
+    {
         Adjustment::where('id', $id)->update(['name' => $request->name, 'admin_show' => 1]);
     }
 

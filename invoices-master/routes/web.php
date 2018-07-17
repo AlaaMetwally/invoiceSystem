@@ -48,6 +48,15 @@ Route::group(['middleware' => ['auth'],'prefix' => "adjustment" , 'as' => "adjus
     Route::get('show/{id}', 'AdjustmentController@show')->name('show');
     Route::delete('{id}', 'AdjustmentController@destroy');
 });
+//crud operations on the users
+Route::group(['middleware' => ['auth'],'prefix' => "user" , 'as' => "user."], function () {
+    Route::get('/', 'UserController@index')->name('index');
+    Route::get('{id}/edit', 'UserController@edit')->name('edit');
+    Route::post('{id}/update', 'UserController@update')->name('update');
+    Route::get('create', 'UserController@init')->name('init');
+    Route::get('show/{id}', 'UserController@show')->name('show');
+    Route::delete('{id}', 'UserController@destroy');
+});
 /*
 |--------------------------------------------------------------------------
 | Web Routes

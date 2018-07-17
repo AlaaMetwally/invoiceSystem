@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use http\Env\Request;
+
+
+use Auth;
 
 class User extends Authenticatable
 {
@@ -15,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','phone','address','country','city','logo'
+        'name', 'email','phone','address','country','city','logo','admin_show',
     ];
 
     /**

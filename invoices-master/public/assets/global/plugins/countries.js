@@ -270,23 +270,23 @@ function CountryCity($country, countryElementId, stateElementId) {
 
         function populateStates(countryElementId, stateElementId) {
 
-            // var selectedCountryIndex = document.getElementById(countryElementId).selectedIndex;
+            var selectedCountryIndex = document.getElementById(countryElementId).selectedIndex;
 
-            // var stateElement = document.getElementById(stateElementId);
+            var stateElement = document.getElementById(stateElementId);
 
-            // stateElement.length = 0; // Fixed by Julian Woods
-            // stateElement.options[0] = new Option('Select City', '');
-            // stateElement.selectedIndex = 0;
+            stateElement.length = 0; // Fixed by Julian Woods
+            stateElement.options[0] = new Option('Select City', '');
+            stateElement.selectedIndex = 0;
 
-            // var state_arr = s_a[selectedCountryIndex].split("|");
+            var state_arr = s_a[selectedCountryIndex].split("|");
 
-            // for (var i = 0; i < state_arr.length; i++) {
-            //     stateElement.options[stateElement.length] = new Option(state_arr[i], state_arr[i]);
-            // }
-            // //set default value
-            // if(stateElement.dataset.defaultValue !=''){
-            //     stateElement.value = stateElement.dataset.defaultValue;
-            // }
+            for (var i = 0; i < state_arr.length; i++) {
+                stateElement.options[stateElement.length] = new Option(state_arr[i], state_arr[i]);
+            }
+            //set default value
+            if(stateElement.dataset.defaultValue !=''){
+                stateElement.value = stateElement.dataset.defaultValue;
+            }
 
         }
 
