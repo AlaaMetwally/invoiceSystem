@@ -63,7 +63,7 @@
                     <button type="button" class="btn btn-primary popup" data-toggle="modal" data-target="#m_modal_1" style="margin-left: 30px">
                         Upload Logo
                     </button>
-                    <div class="white-popup" id="check" style="display:none;position: relative;background: #FFF;padding: 20px;width: auto;max-width: 500px;margin: 20px auto;">
+                    <div class="white-popup" id="check" style="display:none;position: relative;background: #FFF;padding: 20px;width: auto;max-width: 900px;height:700px;margin: 20px auto;">
                     <!--form of uploading image -->
                     
                     <div class="modal-body">
@@ -74,21 +74,21 @@
                                       <input data-validation="" data-name="" class="avatar-src" name="avatar_src" type="hidden">
                                       <input data-validation="" data-name="" class="avatar-data" name="avatar_data" type="hidden">
                                       <label for="avatarInput">Local upload</label>
-                                      <input data-validation="" data-name="" class="avatar-input" id="avatarInput" name="avatar_file" type="file">
+                                      <input data-validation="" data-name="" class="avatar-input" id="avatarInput" name="avatar_file" type="file" style="padding-bottom:15px">
                                     </div>
 
                                     <!-- Crop and preview -->
-                                    <div class="row">
+                                    <div class="row" style="padding-bottom: 30px">
                                       <div class="col-md-9">
-                                        <div class="avatar-wrapper"></div>
+                                          <canvas id="viewport" width="602" height="500" style="background-color: white;display: block; border: none; visibility: visible; margin: 0px; padding: 0px; position: absolute; top: 0px; left: 0px; width: 602px; height: 500px;"></canvas>
+                                        </canvas>
                                       </div>
                                       <div class="col-md-3">
-                                        <div class="avatar-preview preview-lg"><img src="https://png2.kisspng.com/sh/ad2dd1a13b945474f08c450c90e7183c/L0KzQYi4UsE5N5YAUZGAYUO6RoS3gcdlamE3TZCAOEe8R4W3VME2OWQ6T6s7N0S4QYWBTwBvbz==/5a37630a7db025.5879740415135792745148.png" id="imgCrop"></div>
-                                      </div>
+                                          <canvas id="preview" style="width:150px;height:150px;overflow:hidden;"></canvas></div>
                                     </div>
 
                                     <div class="row avatar-btns">
-                                     
+
                                       <div class="col-md-3">
                                         <button type="button" class="btn btn-primary btn-block avatar-save">Done</button>
                                       </div>
