@@ -63,6 +63,8 @@
                     <button type="button" class="btn btn-primary popup" data-toggle="modal" data-target="#m_modal_1" style="margin-left: 30px">
                         Upload Logo
                     </button>
+                    <p id="logoname"></p>
+                    <img src="{{$user->logo}}" name="logo" id="logo">
                     <div class="white-popup" id="check" style="display:none;position: relative;background: #FFF;padding: 20px;width: auto;max-width: 900px;height:700px;margin: 20px auto;">
                     <!--form of uploading image -->
                     
@@ -78,13 +80,13 @@
                                     </div>
 
                                     <!-- Crop and preview -->
-                                    <div class="row" style="padding-bottom: 30px">
+                                    <div class="row" style="padding-bottom: 30px;">
                                       <div class="col-md-9">
                                           <canvas id="viewport" width="602" height="500" style="background-color: white;display: block; border: none; visibility: visible; margin: 0px; padding: 0px; position: absolute; top: 0px; left: 0px; width: 602px; height: 500px;"></canvas>
                                         </canvas>
                                       </div>
                                       <div class="col-md-3">
-                                          <canvas id="preview" style="width:150px;height:150px;overflow:hidden;"></canvas></div>
+                                          <canvas id="preview" style="border: solid aliceblue;width:150px;height:150px;overflow:hidden;"></canvas></div>
                                     </div>
 
                                     <div class="row avatar-btns">

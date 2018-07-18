@@ -58,7 +58,8 @@ class UserController extends Controller
             'address' => $request->address,
             'country' => $request->country,
             'city' => $request->city,
-            'logo' => $request->logo]);
+            'logo' => $request->logo,
+            ]);
 
         return response()->json([
             'url' => route('user.index'),

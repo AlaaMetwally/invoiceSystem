@@ -1,6 +1,8 @@
 $(document).on('ready pjax:success', function () {
-    $(document).on('click', '#avatarInput', function (e) {
-        console.log(document.getElementById('avatarInput').value.replace(/^.*[\\\/]/, ''));
+    $(".avatar-save").click(function(e) {
+        $.magnificPopup.close();
+        $image_upload = document.getElementById("avatarInput").value.replace(/^C:\\fakepath\\/i, '');
+        document.getElementById('logoname').innerHTML = $image_upload; 
     });
     $('#editForm').ajaxForm({
         success: function (data) {
@@ -20,11 +22,24 @@ $(document).on('ready pjax:success', function () {
             },
         }
     });
-    function make_base() {
+    var count = 0;
+    function make_base(input) {
         var base_image = new Image();
-        base_image.src = 'https://res.cloudinary.com/prestige-gifting/image/fetch/fl_progressive,q_95,e_sharpen:50,w_480/e_saturation:05/https://www.prestigeflowers.co.uk/images/NF4016-130116.jpg';
-        base_image.onload = function () {
-            context.drawImage(base_image, 0, 0);
+       
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                base_image.src = e.target.result;
+            }
+            base_image.onload = function (e) {
+                count++;
+                if(count>1){
+                    context.clearRect(0, 0, context.canvas.width, context.canvas.height)
+                }
+                context.drawImage(base_image, 0, 0);
+            }
+            reader.readAsDataURL(input.files[0]);
+
         }
     }
 
@@ -42,8 +57,9 @@ $(document).on('ready pjax:success', function () {
 
     var canvas = document.getElementById('viewport'),
         context = canvas.getContext('2d');
-
-    make_base();
+        $("#avatarInput").change(function(){
+            make_base(this);
+        });
 
     $('#viewport').Jcrop({
         onChange: updatePreview,
