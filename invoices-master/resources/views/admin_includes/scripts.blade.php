@@ -1,8 +1,7 @@
 <!-- BEGIN CORE PLUGINS -->
 <script src="{{asset('assets/global/plugins/jquery.min.js')}}" type="text/javascript"></script>
 <script type="text/javascript" src="{{asset('assets/scripts.js')}}"></script>
-<script src="{{asset('assets/global/plugins/jcrop/js/jquery.Jcrop.min.js')}}" type="text/javascript"></script>
-<link href="{{asset('assets/global/plugins/jcrop/css/jquery.Jcrop.min.css')}}" rel="stylesheet" type="text/css" />
+<script src="{{asset('assets/global/plugins/cropper/dist/cropper.js')}}" type="text/javascript"></script>
 <script type="text/javascript" src="{{asset('assets/global/plugins/jquery-ui-1.12.1/jquery-ui.min.js')}}"></script>
 <script src="{{asset('assets/global/plugins/jquery.blockui.min.js')}}" type="text/javascript" charset="UTF-8"></script>
 <script src="{{asset('assets/global/plugins/pjax.js')}}" type="text/javascript"></script>

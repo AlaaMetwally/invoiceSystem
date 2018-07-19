@@ -1,5 +1,5 @@
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
-
+<link href="{{asset('css/additional.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('assets/global/plugins/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css"/>
 <link href="{{asset('assets/global/plugins/simple-line-icons/simple-line-icons.min.css')}}" rel="stylesheet"
       type="text/css"/>
@@ -16,6 +16,7 @@
 <link href="{{asset('assets/global/plugins/bootstrap-select/css/bootstrap-select.min.css')}}" rel="stylesheet"
       type="text/css"/>
 <link href="{{asset('assets/week-picker-view.css')}}" rel="stylesheet"/>
+<link href="{{asset('assets/global/plugins/cropper/dist/cropper.css')}}" rel="stylesheet" type="text/css" />
 
 <!-- END GLOBAL MANDATORY STYLES -->
 @yield('plugins_css')

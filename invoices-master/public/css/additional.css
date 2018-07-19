@@ -1,0 +1,11 @@
+.cropper-crop {
+    display: none;
+}
+.avatar-save{
+    margin-top:50px;
+}
+.preview{
+    overflow: hidden;
+    width:    100%;
+    height:    100%;
+}
