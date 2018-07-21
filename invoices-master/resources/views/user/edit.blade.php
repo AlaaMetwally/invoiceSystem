@@ -71,50 +71,8 @@
                         style="margin-left: 30px">
                     Upload Logo
                 </button>
-                <p id="logoname"></p>
-                <img src="{{$user->logo}}" name="logo" id="logo">
-                <div class="white-popup" id="check"
-                     style="display:none;position: relative;background: #FFF;padding: 20px;width: auto;max-width: 900px;height:700px;margin: 20px auto;">
-                    <!--form of uploading image -->
-
-                    <div class="modal-body">
-                        <div class="avatar-body">
-
-                            <!-- Upload image and data -->
-                            <div class="avatar-upload">
-                                <input data-validation="" data-name="" class="avatar-src" name="avatar_src"
-                                       type="hidden">
-                                <input data-validation="" data-name="" class="avatar-data" name="avatar_data"
-                                       type="hidden">
-                                <label for="avatarInput">Local upload</label>
-                                <input type='file' accept='image/*' onchange='openFile(event)'><br>
-
-                            </div>
-
-                            <!-- Crop and preview -->
-                            <div class="row" style="padding-bottom: 30px;">
-                                <div class="col-md-9" style="height:450px">
-                                    <img id="output">
-                                </div>
-                                <div class="col-md-3">
-                                    <div  style="border:0.5px solid grey; width:200px;height: 150px">
-                                    <div class="preview"></div>
-                                    </div>
-                                </div>
-
-                                <div class="row avatar-btns">
-
-                                    <div class="col-md-3">
-                                        <button type="button" class="btn btn-primary btn-block avatar-save" style="width: 100px;">Done
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                        <!--end form of uploading image -->
-
-                    </div>
+                <p id="logoname" name="logo"></p>
+                <img src="{{$user->logo}}" id="logo">
                 </div>
                 <div class="m-portlet__foot m-portlet__foot--fit">
                     <div class="m-form__actions">
@@ -125,6 +83,44 @@
                 </div>
         </form>
         <!--end::Form-->
+        <div class="white-popup" id="check"
+                     style="display:none;position: relative;background: #FFF;padding: 20px;width: auto;max-width: 900px;height:700px;margin: 20px auto;">
+                    <!--form of uploading image -->
+<form class="m-form m-form--fit m-form--label-align-right" id="uploadForm" method="POST" action="{{route('user.upload',$user->id)}}">
+            {{csrf_field()}}
+            <input type="hidden" id="csrf-token" name="_token" value="{{ Session::token() }}">
+                    <div class="modal-body">
+                        <div class="avatar-body">
+
+                            <!-- Upload image and data -->
+                            <div class="avatar-upload">
+                                <label for="avatarInput">Local upload</label>
+                                <input type='file' accept='image/*' onchange='openFile(event)' id="imagename" name="image"><br>
+
+                            </div>
+
+                            <!-- Crop and preview -->
+                            <div class="row" style="padding-bottom: 30px;">
+                                <div class="col-md-9" style="height:450px">
+                                    <img id="output">
+                                </div>
+                                <div class="col-md-3" style="padding-left: 50px;">
+                                    <div  style="border:0.5px solid grey; width:150px;height: 150px">
+                                    <div class="preview"></div>
+                                    </div>
+                                </div>
+                                <div class="row avatar-btns">
+                                    <div class="col-md-3">
+                                        <button type="submit" class="btn btn-primary btn-block avatar-save" style="width: 100px;">Done
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <!--end form of uploading image -->
+        </form>
+                    </div>
     </div>
 
 </div>

@@ -56,6 +56,7 @@ Route::group(['middleware' => ['auth'],'prefix' => "user" , 'as' => "user."], fu
     Route::get('create', 'UserController@init')->name('init');
     Route::get('show/{id}', 'UserController@show')->name('show');
     Route::delete('{id}', 'UserController@destroy');
+    Route::post('{id}/image','UserController@upload')->name('upload');
 });
 /*
 |--------------------------------------------------------------------------

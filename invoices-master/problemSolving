@@ -1,0 +1,3 @@
+when such an error occurs
+(1/1) RuntimeExceptionThe only supported ciphers are AES-128-CBC and AES-256-CBC with the correct key lengths.
+just put that command php artisan key:generate 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class UserController extends Controller
 {
@@ -33,39 +34,30 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-
-//        $image = $request->logo;
-//        $input['imagename'] = time().'.'.$image->getClientOriginalExtension();
-//
-//
-//        $destinationPath = public_path('/thumbnail');
-//        $img = Image::make($image->getRealPath());
-//        $img->resize(100, 100, function ($constraint) {
-//            $constraint->aspectRatio();
-//        })->save($destinationPath.'/'.$input['imagename']);
-//
-//
-//        $destinationPath = public_path('/images');
-//        $image->move($destinationPath, $input['imagename']);
-//
-//
-//        $this->postImage->add($input);
-
-
-        User::where('id', $id)->update(['name' => $request->name,
+     User::where('id', $id)->update([
+            'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
             'country' => $request->country,
             'city' => $request->city,
-            'logo' => $request->logo,
             ]);
 
         return response()->json([
             'url' => route('user.index'),
-            'success' => 'record has been saved',
-            'image' => $request->logo
+            'success' => 'record has been saved'
         ]);
     }
-
+    public function upload(Request $request,$id){
+        $image = $request->image;
+        User::where('id', $id)->update([
+            'logo' => $request->image,
+            ]);
+            return response()->json([
+                'url' => route('user.edit',$id),
+                'success' => 'Image Upload successful',
+                'id' => $id,
+                'image' => $image
+            ]);
+    }
 }
