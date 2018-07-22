@@ -54,8 +54,10 @@ class UserController extends Controller
     {
         $pathname = $request->file('pathname')->getClientOriginalName();
         $path = $request->pathname;
-        Storage::put('uploads/users/'.$pathname, $path);
-
+    dd($request->all());
+        
+        Storage::put('uploads/users/', $path);
+        
         User::where('id', $id)->update([
             'logo' => $request->image,
         ]);

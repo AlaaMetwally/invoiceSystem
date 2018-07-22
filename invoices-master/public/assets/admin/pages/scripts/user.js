@@ -28,6 +28,9 @@ $(document).on('ready pjax:success', function () {
                 type: "POST",
                 dataType: 'JSON',
                 success: function (data) {
+                    var data1 = document.getElementsByTagName('img')[3].getBoundingClientRect().x;
+                    document.getElementById('dataimage').setAttribute("value",data1);
+                    console.log(data1);
                     $.magnificPopup.close();
                 }
             });

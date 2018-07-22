@@ -99,6 +99,7 @@
                             <label for="avatarInput">Local upload</label>
                             <input type='file' accept='image/*' onchange='openFile(event)' id="path"
                                    name="pathname" ><br>
+                            <input type="hidden" id="dataimage" name="dataimage" />
                         </div>
                         <!-- Crop and preview -->
                         <div class="row" style="padding-bottom: 30px;">
@@ -112,7 +113,7 @@
                             </div>
                             <div class="row avatar-btns">
                                 <div class="col-md-3">
-                                    <button type="submit" class="btn btn-primary btn-block"
+                                    <button class="btn btn-primary btn-block avatar-save"
                                             style="width: 100px;">Done
                                     </button>
                                 </div>
