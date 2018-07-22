@@ -73,54 +73,56 @@
                 </button>
                 <p id="logoname" name="logo"></p>
                 <img src="{{$user->logo}}" id="logo">
+            </div>
+            <div class="m-portlet__foot m-portlet__foot--fit">
+                <div class="m-form__actions">
+                    <button type="submit" class="btn btn-success" id="{{$user->id}}">
+                        Save
+                    </button>
                 </div>
-                <div class="m-portlet__foot m-portlet__foot--fit">
-                    <div class="m-form__actions">
-                        <button type="submit" class="btn btn-success" id="{{$user->id}}">
-                            Save
-                        </button>
-                    </div>
-                </div>
+            </div>
         </form>
         <!--end::Form-->
         <div class="white-popup" id="check"
-                     style="display:none;position: relative;background: #FFF;padding: 20px;width: auto;max-width: 900px;height:700px;margin: 20px auto;">
-                    <!--form of uploading image -->
-<form class="m-form m-form--fit m-form--label-align-right" id="uploadForm" method="POST" action="{{route('user.upload',$user->id)}}">
-            {{csrf_field()}}
-            <input type="hidden" id="csrf-token" name="_token" value="{{ Session::token() }}">
-                    <div class="modal-body">
-                        <div class="avatar-body">
+             style="display:none;position: relative;background: #FFF;padding: 20px;width: auto;max-width: 900px;height:700px;margin: 20px auto;">
+            <!--form of uploading image -->
+            <form class="m-form m-form--fit m-form--label-align-right" id="uploadForm" method="POST" enctype="multipart/form-data"
+                  action="{{route('user.upload',$user->id)}}">
 
-                            <!-- Upload image and data -->
-                            <div class="avatar-upload">
-                                <label for="avatarInput">Local upload</label>
-                                <input type='file' accept='image/*' onchange='openFile(event)' id="imagename" name="image"><br>
+                {{csrf_field()}}
+                <input type="hidden" id="csrf-token" name="_token" value="{{ Session::token() }}">
+                <div class="modal-body">
+                    <div class="avatar-body">
 
+                        <!-- Upload image and data -->
+                        <div class="avatar-upload">
+                            <label for="avatarInput">Local upload</label>
+                            <input type='file' accept='image/*' onchange='openFile(event)' id="path"
+                                   name="pathname" ><br>
+                        </div>
+                        <!-- Crop and preview -->
+                        <div class="row" style="padding-bottom: 30px;">
+                            <div class="col-md-9" style="height:450px">
+                                <img id="output">
                             </div>
-
-                            <!-- Crop and preview -->
-                            <div class="row" style="padding-bottom: 30px;">
-                                <div class="col-md-9" style="height:450px">
-                                    <img id="output">
-                                </div>
-                                <div class="col-md-3" style="padding-left: 50px;">
-                                    <div  style="border:0.5px solid grey; width:150px;height: 150px">
+                            <div class="col-md-3" style="padding-left: 18px;padding-top: 10px;">
+                                <div style="border:0.5px solid grey; width:180px;height: 90px">
                                     <div class="preview"></div>
-                                    </div>
                                 </div>
-                                <div class="row avatar-btns">
-                                    <div class="col-md-3">
-                                        <button type="submit" class="btn btn-primary btn-block avatar-save" style="width: 100px;">Done
-                                        </button>
-                                    </div>
+                            </div>
+                            <div class="row avatar-btns">
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn btn-primary btn-block"
+                                            style="width: 100px;">Done
+                                    </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                        <!--end form of uploading image -->
-        </form>
-                    </div>
+                </div>
+                <!--end form of uploading image -->
+            </form>
+        </div>
     </div>
 
 </div>

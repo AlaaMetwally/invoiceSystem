@@ -10,28 +10,28 @@ var openFile = function(event)
         output.src = dataURL;
         $("#output").cropper({
             preview: ".preview",
-            aspectRatio: 1,
+            aspectRatio: 2,
+            minContainerWidth: 642,
+            minContainerHeight: 450,
         });
     };
     var cropper = $("#preview").data('cropper');
     reader.readAsDataURL(input.files[0]);
 };
 $(document).on('ready pjax:success', function () {
-    var id =1;
+
     $(".avatar-save").click(function(e) {
-        $.magnificPopup.close();
+        var id =1;
         $.ajax(
             {
                 url: "/user/"+id+"/image",
                 type: "POST",
                 dataType: 'JSON',
-                success: function (response) {
-                    window.location = response.url;
-                },
-                error:function(){
-                    console.log("hello")
+                success: function (data) {
+                    $.magnificPopup.close();
                 }
-            });  
+            });
+
     });
     $('#editForm').ajaxForm({
         success: function (data) {

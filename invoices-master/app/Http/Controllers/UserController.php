@@ -7,6 +7,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
 use Intervention\Image\ImageManagerStatic as Image;
+use Storage;
 
 class UserController extends Controller
 {
@@ -34,30 +35,35 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-     User::where('id', $id)->update([
+        User::where('id', $id)->update([
             'name' => $request->name,
             'email' => $request->email,
             'phone' => $request->phone,
             'address' => $request->address,
             'country' => $request->country,
             'city' => $request->city,
-            ]);
+        ]);
 
         return response()->json([
             'url' => route('user.index'),
             'success' => 'record has been saved'
         ]);
     }
-    public function upload(Request $request,$id){
-        $image = $request->image;
+
+    public function upload(Request $request, $id)
+    {
+        $pathname = $request->file('pathname')->getClientOriginalName();
+        $path = $request->pathname;
+        Storage::put('uploads/users/'.$pathname, $path);
+
         User::where('id', $id)->update([
             'logo' => $request->image,
-            ]);
-            return response()->json([
-                'url' => route('user.edit',$id),
-                'success' => 'Image Upload successful',
-                'id' => $id,
-                'image' => $image
-            ]);
+        ]);
+
+        return response()->json([
+            'url' => route('user.edit', $id),
+            'success' => 'Image Upload successful',
+            'id' => $id,
+        ]);
     }
 }
