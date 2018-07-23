@@ -53,10 +53,20 @@ class UserController extends Controller
     public function upload(Request $request, $id)
     {
         $pathname = $request->file('pathname')->getClientOriginalName();
-        $path = $request->pathname;
-    dd($request->all());
-        
-        Storage::put('uploads/users/', $path);
+        $path = $request->file('pathname');
+        $img = Image::make($path);
+
+        $x = (integer)json_decode($request->dataimage)->x;
+        $y = (integer)json_decode($request->dataimage)->y;
+        $width = (integer)json_decode($request->dataimage)->width;
+        $height = (integer)json_decode($request->dataimage)->height;
+        $top = (integer) json_decode($request->dataimage)->top;
+        $bottom = (integer) json_decode($request->dataimage)->bottom;
+        $right = (integer) json_decode($request->dataimage)->right;
+        $left = (integer) json_decode($request->dataimage)->left;
+        $img->crop($width, $height, $width-$x,$height-$y);
+
+        Storage::disk('local')->put('uploads/users/'.$pathname, $img->stream());
         
         User::where('id', $id)->update([
             'logo' => $request->image,

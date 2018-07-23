@@ -19,6 +19,8 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
-    "cropper": "^4.0.0"
+    "cropper": "^4.0.0",
+    "email-existence": "^0.1.6",
+    "validator": "^10.4.0"
   }
 }

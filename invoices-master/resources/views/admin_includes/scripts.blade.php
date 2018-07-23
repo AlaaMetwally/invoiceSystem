@@ -3,6 +3,7 @@
 <script type="text/javascript" src="{{asset('assets/scripts.js')}}"></script>
 <script src="{{asset('assets/global/plugins/cropper/dist/cropper.js')}}" type="text/javascript"></script>
 <script type="text/javascript" src="{{asset('assets/global/plugins/jquery-ui-1.12.1/jquery-ui.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('assets/global/plugins/validator.js/validator.min.js')}}"></script>
 <script src="{{asset('assets/global/plugins/jquery.blockui.min.js')}}" type="text/javascript" charset="UTF-8"></script>
 <script src="{{asset('assets/global/plugins/pjax.js')}}" type="text/javascript"></script>
 <script>

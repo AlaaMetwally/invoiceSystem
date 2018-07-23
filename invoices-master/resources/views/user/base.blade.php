@@ -12,6 +12,7 @@ $j = '';
 
 @section('page_js')
     <script src="{{asset('assets/admin/pages/scripts/user.js')}}" type="text/javascript" charset="UTF-8"></script>
+    <script src="{{asset('assets/admin/pages/scripts/ajaxForms.js')}}" type="text/javascript" charset="UTF-8"></script>
 @endsection
 
 

@@ -14,7 +14,7 @@
             </div>
         </div>
         <!--begin::Form-->
-        <form class="m-form m-form--fit m-form--label-align-right" id="editForm" method="POST"
+        <form class="m-form m-form--fit m-form--label-align-right ajaxform" id="editForm" method="POST"
               action="{{route('user.update',$user->id)}}">
             {{csrf_field()}}
             <input type="hidden" id="csrf-token" name="_token" value="{{ Session::token() }}">
@@ -24,14 +24,14 @@
                         Name *
                     </label>
                     <input type="text" name="name" class="form-control m-input m-input--solid" id="name"
-                           value="{{$user->name}}">
+                           value="{{$user->name}}"><p id="testname" style="color:red"></p>
                 </div>
                 <div class="form-group m-form__group">
                     <label for="email">
                         Email address *
                     </label>
                     <input type="email" name="email" class="form-control m-input m-input--solid" id="email"
-                           value="{{$user->email}}">
+                           value="{{$user->email}}"><p id="testemail" style="color:red"></p>
 
                 </div>
                 <div class="form-group m-form__group">
@@ -46,7 +46,7 @@
                         Address *
                     </label>
                     <textarea name="address" class="form-control m-input m-input--solid" id="address"
-                              rows="3">{{$user->address}}</textarea>
+                              rows="3">{{$user->address}}</textarea><p id="testaddress" style="color:red"></p>
                 </div>
                 <div class="form-group m-form__group">
                     <label for="country">
@@ -55,7 +55,7 @@
                     <select name="country" class="form-control m-input m-input--solid" id="country"
                             data-default-value="{{$user->country}}" style="padding-top: 5px;">
 
-                    </select>
+                    </select><p id="testcountry" style="color:red"></p>
                 </div>
                 <div class="form-group m-form__group">
                     <label for="city">
@@ -64,7 +64,7 @@
                     <select name="city" class="form-control m-input m-input--solid" id="city"
                             data-default-value="{{$user->city}}" style="padding-top: 5px;">
 
-                    </select>
+                    </select><p id="testcity" style="color:red"></p>
                 </div>
 
                 <button type="button" class="btn btn-primary popup" data-toggle="modal" data-target="#m_modal_1"
@@ -86,7 +86,7 @@
         <div class="white-popup" id="check"
              style="display:none;position: relative;background: #FFF;padding: 20px;width: auto;max-width: 900px;height:700px;margin: 20px auto;">
             <!--form of uploading image -->
-            <form class="m-form m-form--fit m-form--label-align-right" id="uploadForm" method="POST" enctype="multipart/form-data"
+            <form class="m-form m-form--fit m-form--label-align-right ajaxform" id="uploadForm" method="POST" enctype="multipart/form-data"
                   action="{{route('user.upload',$user->id)}}">
 
                 {{csrf_field()}}
@@ -98,7 +98,7 @@
                         <div class="avatar-upload">
                             <label for="avatarInput">Local upload</label>
                             <input type='file' accept='image/*' onchange='openFile(event)' id="path"
-                                   name="pathname" ><br>
+                                   name="pathname" ><br><p id="logoimage" style="color:red"></p>
                             <input type="hidden" id="dataimage" name="dataimage" />
                         </div>
                         <!-- Crop and preview -->
