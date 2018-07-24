@@ -1,5 +1,5 @@
 $(document).on('ready pjax:success', function () {
-    var table = $('#adjustments-table').DataTable({
+    var table = $('#payments-table').DataTable({
         "columnDefs": [
             {"orderable": false, "searchable": false, "targets": 1}
         ]
@@ -20,7 +20,7 @@ $(document).on('ready pjax:success', function () {
             function () {
                 $.ajax(
                     {
-                        url: "adjustment/" + id,
+                        url: "payment/" + id,
                         type: 'delete',
                         dataType: "JSON",
                         data: {

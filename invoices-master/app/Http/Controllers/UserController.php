@@ -60,22 +60,26 @@ class UserController extends Controller
         $y = (integer)json_decode($request->dataimage)->y;
         $width = (integer)json_decode($request->dataimage)->width;
         $height = (integer)json_decode($request->dataimage)->height;
-        $top = (integer) json_decode($request->dataimage)->top;
-        $bottom = (integer) json_decode($request->dataimage)->bottom;
-        $right = (integer) json_decode($request->dataimage)->right;
-        $left = (integer) json_decode($request->dataimage)->left;
-        $img->crop($width, $height, $width-$x,$height-$y);
+        $top = (integer)json_decode($request->dataimage)->top;
+        $bottom = (integer)json_decode($request->dataimage)->bottom;
+        $right = (integer)json_decode($request->dataimage)->right;
+        $left = (integer)json_decode($request->dataimage)->left;
 
-        Storage::disk('local')->put('uploads/users/'.$pathname, $img->stream());
-        
+        $img->crop($width, $height, $x, $y);
+        $imageName = '/uploads/users/' . time() . '_' . $pathname;
+        Storage::disk('local')->put('public' . $imageName, $img->stream());
+
+        $imgPath = json_encode(Storage::disk('local')->get('public' . $imageName));
+
         User::where('id', $id)->update([
-            'logo' => $request->image,
+            'logo' => $imageName,
         ]);
 
         return response()->json([
             'url' => route('user.edit', $id),
             'success' => 'Image Upload successful',
             'id' => $id,
+            'image' => $imgPath,
         ]);
     }
 }

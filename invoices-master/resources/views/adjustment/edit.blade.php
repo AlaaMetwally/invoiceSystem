@@ -1,5 +1,5 @@
 <div class="page-content-body">
-    <div class="row" id="pjax-container" style="margin-left:0; margin-right:10px;">
+    <div class="row" style="margin-left:0; margin-right:10px;">
         <form class="form-horizontal" id="myForm" method="POST" action="{{route('adjustment.update',$adjustment->id)}}">
             {{csrf_field()}}
             <input type="hidden" id="csrf-token" name="_token" value="{{ Session::token() }}">

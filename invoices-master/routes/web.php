@@ -40,7 +40,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => "log", 'as' => "log."], func
     /*--routes@@log*/
 });
 //crud operations on the Adjustments
-Route::group(['middleware' => ['auth'],'prefix' => "adjustment" , 'as' => "adjustment."], function () {
+Route::group(['middleware' => ['auth'], 'prefix' => "adjustment", 'as' => "adjustment."], function () {
     Route::get('/', 'AdjustmentController@index')->name('index');
     Route::get('{id}/edit', 'AdjustmentController@edit')->name('edit');
     Route::post('{id}/update', 'AdjustmentController@update')->name('update');
@@ -49,14 +49,23 @@ Route::group(['middleware' => ['auth'],'prefix' => "adjustment" , 'as' => "adjus
     Route::delete('{id}', 'AdjustmentController@destroy');
 });
 //crud operations on the users
-Route::group(['middleware' => ['auth'],'prefix' => "user" , 'as' => "user."], function () {
+Route::group(['middleware' => ['auth'], 'prefix' => "user", 'as' => "user."], function () {
     Route::get('/', 'UserController@index')->name('index');
     Route::get('{id}/edit', 'UserController@edit')->name('edit');
     Route::post('{id}/update', 'UserController@update')->name('update');
     Route::get('create', 'UserController@init')->name('init');
     Route::get('show/{id}', 'UserController@show')->name('show');
     Route::delete('{id}', 'UserController@destroy');
-    Route::post('{id}/image','UserController@upload')->name('upload');
+    Route::post('{id}/image', 'UserController@upload')->name('upload');
+});
+//crud operations on the payments
+Route::group(['middleware' => ['auth'], 'prefix' => "payment", 'as' => "payment."], function () {
+    Route::get('/', 'PaymentController@index')->name('index');
+    Route::get('{id}/edit', 'PaymentController@edit')->name('edit');
+    Route::post('{id}/update', 'PaymentController@update')->name('update');
+    Route::get('create', 'PaymentController@init')->name('init');
+    Route::get('show/{id}', 'PaymentController@show')->name('show');
+    Route::delete('{id}', 'PaymentController@destroy');
 });
 /*
 |--------------------------------------------------------------------------
