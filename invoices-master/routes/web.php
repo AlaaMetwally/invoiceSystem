@@ -67,6 +67,34 @@ Route::group(['middleware' => ['auth'], 'prefix' => "payment", 'as' => "payment.
     Route::get('show/{id}', 'PaymentController@show')->name('show');
     Route::delete('{id}', 'PaymentController@destroy');
 });
+//crud operations on the currencies
+Route::group(['middleware' => ['auth'], 'prefix' => "currency", 'as' => "currency."], function () {
+    Route::get('/', 'CurrencyController@index')->name('index');
+    Route::get('{id}/edit', 'CurrencyController@edit')->name('edit');
+    Route::post('{id}/update', 'CurrencyController@update')->name('update');
+    Route::get('create', 'CurrencyController@init')->name('init');
+    Route::get('show/{id}', 'CurrencyController@show')->name('show');
+    Route::delete('{id}', 'CurrencyController@destroy');
+});
+//crud operations on the units
+Route::group(['middleware' => ['auth'], 'prefix' => "unit", 'as' => "unit."], function () {
+    Route::get('/', 'UnitController@index')->name('index');
+    Route::get('{id}/edit', 'UnitController@edit')->name('edit');
+    Route::post('{id}/update', 'UnitController@update')->name('update');
+    Route::get('create', 'UnitController@init')->name('init');
+    Route::get('show/{id}', 'UnitController@show')->name('show');
+    Route::delete('{id}', 'UnitController@destroy');
+});
+//crud operations on the services
+Route::group(['middleware' => ['auth'], 'prefix' => "service", 'as' => "service."], function () {
+    Route::get('/', 'ServiceController@index')->name('index');
+    Route::get('{id}/edit', 'ServiceController@edit')->name('edit');
+    Route::post('{id}/update', 'ServiceController@update')->name('update');
+    Route::get('create', 'ServiceController@init')->name('init');
+    Route::get('show/{id}', 'ServiceController@show')->name('show');
+    Route::delete('{id}', 'ServiceController@destroy');
+});
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes

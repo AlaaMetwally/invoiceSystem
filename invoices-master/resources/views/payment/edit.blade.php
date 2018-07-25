@@ -1,6 +1,6 @@
 <div class="page-content-body">
     <div class="row" style="margin-left:0; margin-right:10px;">
-        <form class="form-horizontal" id="myForm" method="POST" action="{{route('payment.update',$payment->id)}}">
+        <form class="form-horizontal ajaxform" id="myForm" method="POST" action="{{route('payment.update',$payment->id)}}">
             {{csrf_field()}}
             <input type="hidden" id="csrf-token" name="_token" value="{{ Session::token() }}">
 
@@ -9,6 +9,7 @@
                 <div class="col-md-6">
                     <input data-validation="name" id="payname" data-name="Payment Name" type="text"
                            class="form-control" name="name" value="{{$payment->name}}" autofocus="">
+                    <p id="testname" style="color:red"></p>
                 </div>
             </div>
 
@@ -16,7 +17,8 @@
                 <label for="text" class="col-md-4 control-label">Payment Info<span style="color:red;">*</span></label>
                 <div class="col-md-6">
                     <textarea data-validation="required" id="payinfo" data-name="Payment Info"
-                              class="form-control" name="info" value="{{$payment->info}}" autofocus=""></textarea>
+                              class="form-control" name="info" autofocus="">{{$payment->info}}</textarea>
+                    <p id="testrequired" style="color:red"></p>
                 </div>
             </div>
             <div class="form-group" id="save">

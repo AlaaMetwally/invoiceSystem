@@ -1,5 +1,5 @@
 $(document).on('ready pjax:success', function () {
-    var table = $('#payments-table').DataTable({
+    var table = $('#currencies-table').DataTable({
         "columnDefs": [
             {"orderable": false, "searchable": false, "targets": 1}
         ]
@@ -20,7 +20,7 @@ $(document).on('ready pjax:success', function () {
             function () {
                 $.ajax(
                     {
-                        url: "payment/" + id,
+                        url: "currency/" + id,
                         type: 'delete',
                         dataType: "JSON",
                         data: {
@@ -29,6 +29,9 @@ $(document).on('ready pjax:success', function () {
                         success: function (response) {
                             swal("Deleted!", "It is deleted successfully.", "success");
                             table.row($tr).remove().draw();
+                        },
+                        error: function (xhr) {
+                            swal("Record is related to other recorders in another tables!")
                         }
                     });
             });

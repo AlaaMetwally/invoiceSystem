@@ -63,7 +63,7 @@
     </li>
 
     <li class="m-menu__item  <?php if(isset($i) && $i == '1' ){?>m-menu__item--active <?php ;}?>" aria-haspopup="true">
-        <a href="/service" class="m-menu__link">
+        <a href="{{route('service.index')}}" class="m-menu__link">
 			<i class="m-menu__link-icon fa fa-folder-o"></i>
             <span class="m-menu__link-title">
 				<span class="m-menu__link-wrap">
@@ -90,7 +90,7 @@
     </li>
 
     <li class="m-menu__item  <?php if(isset($i) && $i == '1' ){?>m-menu__item--active <?php ;}?>" aria-haspopup="true">
-        <a href="/unit" class="m-menu__link">
+        <a href="{{route('unit.index')}}" class="m-menu__link">
             <i class="m-menu__link-icon fa fa-filter"></i>
             <span class="m-menu__link-title">
 				<span class="m-menu__link-wrap">
@@ -103,7 +103,7 @@
     </li>
 
     <li class="m-menu__item  <?php if(isset($i) && $i == '1' ){?>m-menu__item--active <?php ;}?>" aria-haspopup="true">
-        <a href="/currency" class="m-menu__link">
+        <a href="{{route('currency.index')}}" class="m-menu__link">
             <i class="m-menu__link-icon fa fa-usd"></i>
             <span class="m-menu__link-title">
 				<span class="m-menu__link-wrap">

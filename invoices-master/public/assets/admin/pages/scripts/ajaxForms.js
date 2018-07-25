@@ -8,9 +8,13 @@ $(document).on('ready pjax:success', function () {
     $('.ajaxform').ajaxForm({
         beforeSerialize: beforeSerialize,
         beforeSubmit: beforeSaving,
-        success: function (data) {
-            document.getElementById('logo').src = btoa(data.image);
-            $.magnificPopup.close();
+        success: function (data) {  
+            if(data.url){
+                window.location = data.url;
+            }
+            else{
+                $.magnificPopup.close();
+            }
         }
     });
 
@@ -107,16 +111,16 @@ function emailValidate(email, check) {
 }
 
 function requiredValidate(text, check) {
-    var addressRegex = /^\d+\s[A-Za-z0-9 ]+\s[A-Za-z ]+/g;
+    var addressRegex = /^[A-Za-z0-9 ]+\s[A-Za-z0-9 ]+/g;
 
     var addressResult = addressRegex.test(text);
 
     if (addressResult == true) {
-        document.getElementById('testaddress').innerHTML = "";
+        document.getElementById('testrequired').innerHTML = "";
         return check;
     }
     else {
-        document.getElementById('testaddress').innerHTML = "text invalid";
+        document.getElementById('testrequired').innerHTML = "text invalid";
         return false;
     }
 

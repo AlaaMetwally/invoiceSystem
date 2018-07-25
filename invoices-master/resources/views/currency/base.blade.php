@@ -11,7 +11,7 @@ $j = '';
 @endsection
 
 @section('page_js')
-    <script src="{{asset('assets/admin/pages/scripts/payment.js')}}" type="text/javascript" charset="UTF-8"></script>
+    <script src="{{asset('assets/admin/pages/scripts/currency.js')}}" type="text/javascript" charset="UTF-8"></script>
     <script src="{{asset('assets/admin/pages/scripts/ajaxForms.js')}}" type="text/javascript" charset="UTF-8"></script>
 @endsection
 

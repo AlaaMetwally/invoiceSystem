@@ -44,7 +44,9 @@ class Payment extends Model
 
     public function uptodate($request, $id)
     {
-        Payment::where('id', $id)->update(['name' => $request->name, 'admin_show' => 1]);
+        Payment::where('id', $id)->update(['name' => $request->name, 
+        'info' => $request->info,
+        'admin_show' => 1]);
     }
 
     public function deletion($id)

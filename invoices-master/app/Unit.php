@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Unit extends Model
@@ -9,6 +9,8 @@ class Unit extends Model
     //
     protected $fillable = [
         'name',
+        'user_id',
+        'admin_show',
     ];
 
     public function user(){
@@ -17,5 +19,54 @@ class Unit extends Model
     public function task()
     {
         return $this->hasMany('App\Task');
+    }
+    public function user_tasks()
+    {
+        return $this->hasMany('App\Task')->where(['user_id' => Auth::id(), 'admin_show' => 1]);
+    }
+    public static function index()
+    {
+        $data = [];
+        //to check if the user created this object or not
+        $units = Unit::where('user_id', Auth::id())
+            ->where('admin_show',1)
+            ->get();//admin_show
+        $data['units'] = $units;
+        return $data;
+    }
+
+    public static function init()
+    {
+        //create empty record and redirect to edit to have the view displayed then go to the update to save records
+        $unit= Unit::create(['user_id' => Auth::id()]);
+        $id = $unit->id;
+        return $id;
+    }
+
+    public function edit()
+    {
+        $data = [];
+        $data['unit'] = $this;
+        return $data;
+    }
+
+    public function uptodate($request, $id)
+    {
+        Unit::where('id', $id)->update(['name' => $request->name, 'admin_show' => 1]);
+    }
+
+    public function deletion($id)
+    {
+        $unit = Unit::where('id', $id)
+            ->where('user_id', Auth::id())
+            ->first();
+        $check = count($this->user_tasks);
+        
+        if($check){
+
+        }else{
+            Unit::destroy($id);
+        }
+        return $check;
     }
 }
