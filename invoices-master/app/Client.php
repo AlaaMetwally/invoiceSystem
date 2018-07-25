@@ -10,9 +10,14 @@ class Client extends Model
 {
 
     protected $fillable = [
-        'name', 'email', 'billing_info', 'payment_method_id', 'admin_show', 'user_id'
+        'name',
+        'email', 
+        'billing_info', 
+        'payment_method_id', 
+        'admin_show', 
+        'user_id'
     ];
-    public   $rules = [
+    public $rules = [
         'email' => 'required|unique:clients'
     ];
     public function user()

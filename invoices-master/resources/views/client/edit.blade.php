@@ -31,7 +31,7 @@
 
                         @foreach ($payments as $payment)
 
-                            <option name="payment_method" id="{{$payment->id}}"
+                            <option value="{{$payment->id}}" name="payment_method" id="{{$payment->id}}"
                                     @if($client->payment_method && $client->payment_method_id != $payment->id)  selected @endif>
                                 {{$payment->name}}
                             </option>
@@ -52,3 +52,4 @@
         </form>
     </div>
 </div>
+
