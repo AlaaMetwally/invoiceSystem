@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Auth;
 class Currency extends Model
 {
-    //
+
     protected $fillable = [
         'name',
         'user_id',
@@ -27,7 +27,6 @@ class Currency extends Model
     public static function index()
     {
         $data = [];
-        //to check if the user created this object or not
         $currencies = Currency::where('user_id', Auth::id())
             ->where('admin_show',1)
             ->get();//admin_show
@@ -37,7 +36,6 @@ class Currency extends Model
 
     public static function init()
     {
-        //create empty record and redirect to edit to have the view displayed then go to the update to save records
         $curr = Currency::create(['user_id' => Auth::id()]);
         $id = $curr->id;
         return $id;
@@ -50,9 +48,9 @@ class Currency extends Model
         return $data;
     }
 
-    public function uptodate($request, $id)
+    public function uptodate($request)
     {
-        Currency::where('id', $id)->update(['name' => $request->name, 'admin_show' => 1]);
+        $this->update(['name' => $request->name, 'admin_show' => 1]);
     }
 
     public function deletion($id)
@@ -62,9 +60,7 @@ class Currency extends Model
             ->first();
         $check = count($this->user_tasks);
         
-        if($check){
-
-        }else{
+        if(!$check){
             Currency::destroy($id);
         }
         return $check;

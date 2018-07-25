@@ -94,7 +94,42 @@ Route::group(['middleware' => ['auth'], 'prefix' => "service", 'as' => "service.
     Route::get('show/{id}', 'ServiceController@show')->name('show');
     Route::delete('{id}', 'ServiceController@destroy');
 });
-
+//crud operations on the clients
+Route::group(['middleware' => ['auth'], 'prefix' => "client", 'as' => "client."], function () {
+    Route::get('/', 'ClientController@index')->name('index');
+    Route::get('{id}/edit', 'ClientController@edit')->name('edit');
+    Route::post('{id}/update', 'ClientController@update')->name('update');
+    Route::get('create', 'ClientController@init')->name('init');
+    Route::get('show/{id}', 'ClientController@show')->name('show');
+    Route::delete('{id}', 'ClientController@destroy');
+});
+//crud operations on the invoices
+Route::group(['middleware' => ['auth'], 'prefix' => "invoice", 'as' => "invoice."], function () {
+    Route::get('/', 'InvoiceController@index')->name('index');
+    Route::get('{id}/edit', 'InvoiceController@edit')->name('edit');
+    Route::post('{id}/update', 'InvoiceController@update')->name('update');
+    Route::get('create', 'InvoiceController@init')->name('init');
+    Route::get('show/{id}', 'InvoiceController@show')->name('show');
+    Route::delete('{id}', 'InvoiceController@destroy');
+});
+//crud operations on the tasks
+Route::group(['middleware' => ['auth'], 'prefix' => "task", 'as' => "task."], function () {
+    Route::get('/', 'TaskController@index')->name('index');
+    Route::get('{id}/edit', 'TaskController@edit')->name('edit');
+    Route::post('{id}/update', 'TaskController@update')->name('update');
+    Route::get('create', 'TaskController@init')->name('init');
+    Route::get('show/{id}', 'TaskController@show')->name('show');
+    Route::delete('{id}', 'TaskController@destroy');
+});
+//crud operations on the contacts
+Route::group(['middleware' => ['auth'], 'prefix' => "contact", 'as' => "contact."], function () {
+    Route::get('/', 'ContactController@index')->name('index');
+    Route::get('{id}/edit', 'ContactController@edit')->name('edit');
+    Route::post('{id}/update', 'ContactController@update')->name('update');
+    Route::get('create', 'ContactController@init')->name('init');
+    Route::get('show/{id}', 'ContactController@show')->name('show');
+    Route::delete('{id}', 'ContactController@destroy');
+});
 /*
 |--------------------------------------------------------------------------
 | Web Routes

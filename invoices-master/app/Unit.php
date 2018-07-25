@@ -27,17 +27,15 @@ class Unit extends Model
     public static function index()
     {
         $data = [];
-        //to check if the user created this object or not
         $units = Unit::where('user_id', Auth::id())
             ->where('admin_show',1)
-            ->get();//admin_show
+            ->get();
         $data['units'] = $units;
         return $data;
     }
 
     public static function init()
     {
-        //create empty record and redirect to edit to have the view displayed then go to the update to save records
         $unit= Unit::create(['user_id' => Auth::id()]);
         $id = $unit->id;
         return $id;
@@ -50,9 +48,9 @@ class Unit extends Model
         return $data;
     }
 
-    public function uptodate($request, $id)
+    public function uptodate($request)
     {
-        Unit::where('id', $id)->update(['name' => $request->name, 'admin_show' => 1]);
+        $this->update(['name' => $request->name, 'admin_show' => 1]);
     }
 
     public function deletion($id)
@@ -62,9 +60,7 @@ class Unit extends Model
             ->first();
         $check = count($this->user_tasks);
         
-        if($check){
-
-        }else{
+        if(!$check){
             Unit::destroy($id);
         }
         return $check;

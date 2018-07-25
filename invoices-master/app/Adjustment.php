@@ -37,7 +37,7 @@ class Adjustment extends Model
         $data = [];
         //to check if the user created this object or not
         $adjustments = Adjustment::where('user_id', Auth::id())
-            ->where('admin_show',1)
+            ->where('admin_show', 1)
             ->get();//admin_show
         $data['adjustments'] = $adjustments;
         return $data;
@@ -58,9 +58,9 @@ class Adjustment extends Model
         return $data;
     }
 
-    public function uptodate($request, $id)
+    public function uptodate($request)
     {
-        Adjustment::where('id', $id)->update(['name' => $request->name, 'admin_show' => 1]);
+        $this->update(['name' => $request->name, 'admin_show' => 1]);
     }
 
     public function deletion($id)
@@ -69,9 +69,7 @@ class Adjustment extends Model
             ->where('user_id', Auth::id())
             ->first();
         $check = count($this->user_invoices);
-        if($check){
-
-        }else{
+        if (!$check) {
             Adjustment::destroy($id);
         }
         return $check;

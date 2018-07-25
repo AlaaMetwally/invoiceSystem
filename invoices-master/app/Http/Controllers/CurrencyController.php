@@ -34,7 +34,7 @@ class CurrencyController extends Controller
     public function update(Request $request, $id)
     {
         $currency = Currency::findOrFail($id);
-        $currency->uptodate($request, $id);
+        $currency->uptodate($request);
         return response()->json([
             'url' => route('currency.index'),
             'success' => 'record has been saved'

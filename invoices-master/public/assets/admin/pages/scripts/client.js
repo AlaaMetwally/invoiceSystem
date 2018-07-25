@@ -1,5 +1,5 @@
 $(document).on('ready pjax:success', function () {
-    var table = $('#services-table').DataTable({
+    var table = $('#clients-table').DataTable({
         "columnDefs": [
             {"orderable": false, "searchable": false, "targets": 1}
         ]
@@ -20,7 +20,7 @@ $(document).on('ready pjax:success', function () {
             function () {
                 $.ajax(
                     {
-                        url: "service/" + id,
+                        url: "client/" + id,
                         type: 'delete',
                         dataType: "JSON",
                         data: {
@@ -41,6 +41,5 @@ $(document).on('ready pjax:success', function () {
                     });
             });
     });
-
 });
 

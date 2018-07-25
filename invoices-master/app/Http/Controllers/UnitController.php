@@ -34,7 +34,7 @@ class UnitController extends Controller
     public function update(Request $request, $id)
     {
         $unit = Unit::findOrFail($id);
-        $unit->uptodate($request, $id);
+        $unit->uptodate($request);
         return response()->json([
             'url' => route('unit.index'),
             'success' => 'record has been saved'

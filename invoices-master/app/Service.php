@@ -50,9 +50,9 @@ class Service extends Model
         return $data;
     }
 
-    public function uptodate($request, $id)
+    public function uptodate($request)
     {
-        Service::where('id', $id)->update(['name' => $request->name, 
+        $this->update(['name' => $request->name,
         'description' => $request->info,
         'admin_show' => 1]);
     }
@@ -63,10 +63,7 @@ class Service extends Model
             ->where('user_id', Auth::id())
             ->first();
         $check = count($this->user_tasks);
-        
-        if($check){
-
-        }else{
+        if(!$check){
             Service::destroy($id);
         }
         return $check;

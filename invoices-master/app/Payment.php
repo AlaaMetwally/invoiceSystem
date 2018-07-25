@@ -8,7 +8,8 @@ class Payment extends Model
 {
     //
     protected $fillable = [
-        'name', 'info',
+        'name',
+        'info',
         'user_id',
         'admin_show',
     ];
@@ -17,7 +18,14 @@ class Payment extends Model
     {
         return $this->belongsTo('App\User');
     }
-
+    public function user_clients()
+    {
+        return $this->hasMany('App\Client')->where(['user_id' => Auth::id(),'admin_show' => 1]);
+    }
+    public function client()
+    {
+        return $this->hasMany('App\Client');
+    }
     public static function index()
     {
         $data = [];
@@ -42,9 +50,9 @@ class Payment extends Model
         return $data;
     }
 
-    public function uptodate($request, $id)
+    public function uptodate($request)
     {
-        Payment::where('id', $id)->update(['name' => $request->name, 
+        $this->update(['name' => $request->name,
         'info' => $request->info,
         'admin_show' => 1]);
     }
@@ -54,6 +62,10 @@ class Payment extends Model
         $payment = Payment::where('id', $id)
             ->where('user_id', Auth::id())
             ->first();
-        Payment::destroy($id);
+        $check = count($this->user_clients);
+        if (!$check) {
+            Payment::destroy($id);
+        }
+        return $check;
     }
 }

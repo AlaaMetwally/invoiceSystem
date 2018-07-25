@@ -1,6 +1,6 @@
 <div class="page-content-body">
     <div class="row" style="margin-left:0; margin-right:10px;">
-        <form class="form-horizontal ajaxform" id="myForm" method="POST" action="{{route('currency.update',$currency->id)}}">
+        <form class="form-horizontal ajaxform" method="POST" action="{{route('currency.update',$currency->id)}}">
             {{csrf_field()}}
             <input type="hidden" id="csrf-token" name="_token" value="{{ Session::token() }}">
 

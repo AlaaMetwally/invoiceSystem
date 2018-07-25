@@ -34,7 +34,7 @@ class ServiceController extends Controller
     public function update(Request $request, $id)
     {
         $service = Service::findOrFail($id);
-        $service->uptodate($request, $id);
+        $service->uptodate($request);
         return response()->json([
             'url' => route('service.index'),
             'success' => 'record has been saved'

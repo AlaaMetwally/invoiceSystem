@@ -8,20 +8,16 @@ $(document).on('ready pjax:success', function () {
     $('.ajaxform').ajaxForm({
         beforeSerialize: beforeSerialize,
         beforeSubmit: beforeSaving,
-        success: function (data) {  
-            if(data.url){
+        success: function (data) {
+            if (data.url) {
                 window.location = data.url;
             }
-            else{
+            else if(data.error){
+                document.getElementById('testemail').innerHTML="Email Exists";
+            }
+            else {
                 $.magnificPopup.close();
             }
-        }
-    });
-
-    $('#editForm').ajaxForm({
-        beforeSubmit: beforeSaving,
-        success: function (data) {
-            window.location = data.url;
         }
     });
 });
@@ -78,6 +74,10 @@ function beforeSaving(arr, $form, options) {
         else if ($validation_rule == "city") {
             var city = $input.val();
             check = cityValidate(city, check);
+        }
+        else if ($validation_rule == "select") {
+            var select = $input.val();
+            check = selectValidate(select, check);
         }
     }
     return check;
@@ -145,6 +145,17 @@ function cityValidate(city, check) {
     }
     else {
         document.getElementById('testcity').innerHTML = "city invalid";
+        return false;
+    }
+}
+
+function selectValidate(select, check) {
+    if (select) {
+        document.getElementById('testselect').innerHTML = "";
+        return check;
+    }
+    else {
+        document.getElementById('testselect').innerHTML = "please select one of the options";
         return false;
     }
 }

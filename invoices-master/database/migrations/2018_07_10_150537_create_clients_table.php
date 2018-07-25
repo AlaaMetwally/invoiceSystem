@@ -18,7 +18,8 @@ class CreateClientsTable extends Migration
             $table->string('name')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('billing_info')->nullable();
-            $table->string('payment_method')->nullable();
+            $table->integer('payment_method_id')->unsigned->nullable();
+            $table->foreign('payment_method_id')->references('id')->on('clients');
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->integer('admin_show')->default(0);

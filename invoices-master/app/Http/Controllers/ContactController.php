@@ -3,48 +3,48 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Adjustment;
+use App\Contact;
 use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
 
-class AdjustmentController extends Controller
+class ContactController extends Controller
 {
     //
     public function index()
     {
-        $data = Adjustment::index();
-        $data['partialView'] = 'adjustment.index';
-        return view('adjustment.base', $data);
+        $data = Contact::index();
+        $data['partialView'] = 'contact.index';
+        return view('contact.base', $data);
     }
 
     public function init()
     {
-        $id = Adjustment::init();
-        return redirect(route('adjustment.edit', $id));
+        $id = Contact::init();
+        return redirect(route('contact.edit', $id));
     }
 
     public function edit($id)
     {
-        $adjustment = Adjustment::findOrFail($id); //check for auth user
-        $data = $adjustment->edit();
-        $data['partialView'] = 'adjustment.edit';
-        return view('adjustment.base', $data);
+        $contact = Contact::findOrFail($id); //check for auth user
+        $data = $contact->edit();
+        $data['partialView'] = 'contact.edit';
+        return view('contact.base', $data);
     }
 
     public function update(Request $request, $id)
     {
-        $adjustment = Adjustment::findOrFail($id);
-        $adjustment->uptodate($request);
+        $contact = Contact::findOrFail($id);
+        $contact->uptodate($request);
         return response()->json([
-            'url' => route('adjustment.index'),
+            'url' => route('contact.index'),
             'success' => 'record has been saved'
         ]);
     }
 
     public function destroy($id)
     {
-        $adjustment = Adjustment::findOrFail($id);
-        $check = $adjustment->deletion($id);
+        $contact = Contact::findOrFail($id);
+        $check = $contact->deletion($id);
         if ($check) {
             return response()->json([
                 'error' => 'Record is related to other recorders in another tables!'

@@ -27,8 +27,13 @@ $(document).on('ready pjax:success', function () {
                             "id": id,
                         },
                         success: function (response) {
-                            swal("Deleted!", "It is deleted successfully.", "success");
-                            table.row($tr).remove().draw();
+                            if(response.error){
+                                swal("Record is related to other recorders in another tables!")
+                            }
+                            else{
+                                swal("Deleted!", "It is deleted successfully.", "success");
+                                table.row($tr).remove().draw();
+                            }
                         },
                         error: function (xhr) {
                             swal("Record is related to other recorders in another tables!")

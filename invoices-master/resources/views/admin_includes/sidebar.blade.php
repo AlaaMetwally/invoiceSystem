@@ -3,25 +3,6 @@
 
     {{--@@START@@--}}
 
-
-    <li class="m-menu__item <?php if(isset($i) && $i == '1' ){?>m-menu__item--active <?php ;}?>" aria-haspopup="true">
-        <a href="/project" class="m-menu__link">
-            <i class="m-menu__link-icon fa fa-database"></i>
-            <span class="m-menu__link-title">
-				<span class="m-menu__link-wrap">
-					<span class="m-menu__link-text">
-						Projects
-					</span>
-					<span class="hide m-menu__link-badge">
-						<span class="m-badge m-badge--danger">
-							2
-						</span>
-					</span>
-				</span>
-			</span>
-        </a>
-    </li>
-
     <li class="m-menu__item  <?php if(isset($i) && $i == '1' ){?>m-menu__item--active <?php ;}?>" aria-haspopup="true">
         <a href="{{route('user.index')}}" class="m-menu__link">
             <i class="m-menu__link-icon fa fa-user"></i>
@@ -36,7 +17,7 @@
     </li>
 
     <li class="m-menu__item  <?php if(isset($i) && $i == '1' ){?>m-menu__item--active <?php ;}?>" aria-haspopup="true">
-        <a href="/client" class="m-menu__link">
+        <a href="{{route('client.index')}}" class="m-menu__link">
             <i class="m-menu__link-icon fa fa-users"></i>
             <span class="m-menu__link-wrap">
 				<span class="m-menu__link-title">
@@ -50,7 +31,7 @@
 
     <li class="m-menu__item  <?php if(isset($i) && $i == '1' ){?>m-menu__item--active <?php ;}?>"
         aria-haspopup="true">
-        <a href="/contact" class="m-menu__link">
+        <a href="{{route('contact.index')}}" class="m-menu__link">
             <i class="m-menu__link-icon fa fa-users"></i>
             <span class="m-menu__link-title">
 				<span class="m-menu__link-wrap">
@@ -77,7 +58,7 @@
 
     <li class="m-menu__item  active <?php if(isset($i) && $i == '1' ){?>m-menu__item--active <?php ;}?>"
         aria-haspopup="true">
-        <a href="/invoice" class="m-menu__link">
+        <a href="{{route('invoice.index')}}" class="m-menu__link">
             <i class="m-menu__link-icon fa fa-credit-card"></i>
             <span class="m-menu__link-title">
 				<span class="m-menu__link-wrap">
@@ -116,7 +97,7 @@
     </li>
 
     <li class="m-menu__item  <?php if(isset($i) && $i == '1' ){?>m-menu__item--active <?php ;}?>" aria-haspopup="true">
-		<a href="/task" class="m-menu__link">
+		<a href="{{route('task.index')}}" class="m-menu__link">
             <i class="m-menu__link-icon fa fa-tasks"></i>
             <span class="m-menu__link-title">
 				<span class="m-menu__link-title">
