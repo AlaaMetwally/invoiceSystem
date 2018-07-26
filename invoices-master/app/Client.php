@@ -90,7 +90,6 @@ class Client extends Model
 
     public function uptodate($request)
     {
-
         $validator = Validator::make($request->all(), [
             'email' => 'unique:clients,email,' . $this->id
         ]);
