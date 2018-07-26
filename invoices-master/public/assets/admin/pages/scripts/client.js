@@ -27,10 +27,10 @@ $(document).on('ready pjax:success', function () {
                             "id": id,
                         },
                         success: function (response) {
-                            if(response.error){
+                            if (response.error) {
                                 swal("Record is related to other recorders in another tables!")
                             }
-                            else{
+                            else {
                                 swal("Deleted!", "It is deleted successfully.", "success");
                                 table.row($tr).remove().draw();
                             }
@@ -41,5 +41,40 @@ $(document).on('ready pjax:success', function () {
                     });
             });
     });
+    $(document).on('click', '.addNew', function (e) {
+        $(".addNew").hide();
+        $(".select").hide();
+        $("#testselect").hide();
+        $(".addpayment").show();
+        $(".cancel").show();
+    })
+    $(document).on('click', '.cancel', function (e) {
+        $(".addNew").show();
+        $(".select").show();
+        $("#testselect").show();
+        $(".addpayment").hide();
+        $(".cancel").hide();
+    })
+    $(document).on('click', '.addStuff', function (e) {
+            $.ajax(
+                {
+                    url: "/payment/null/update",
+                    dataType: "JSON",
+                    data: {},
+                    success: function (response) {
+                        if (response.error) {
+                            swal("Record is related to other recorders in another tables!")
+                        }
+                        else {
+                            swal("Deleted!", "It is deleted successfully.", "success");
+                            table.row($tr).remove().draw();
+                        }
+                    },
+                    error: function (xhr) {
+                        swal("Record is related to other recorders in another tables!")
+                    }
+                });
+
+    })
 });
 

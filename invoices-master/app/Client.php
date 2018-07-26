@@ -5,21 +5,21 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 use App\Payment;
+use Illuminate\Validation\Rule;
+use Validator;
 
 class Client extends Model
 {
 
     protected $fillable = [
         'name',
-        'email', 
-        'billing_info', 
-        'payment_method_id', 
-        'admin_show', 
+        'email',
+        'billing_info',
+        'payment_method_id',
+        'admin_show',
         'user_id'
     ];
-    public $rules = [
-        'email' => 'required|unique:clients'
-    ];
+
     public function user()
     {
         return $this->belongsTo('App\User');
@@ -39,10 +39,12 @@ class Client extends Model
     {
         return $this->hasMany('App\Contact');
     }
+
     public function payment()
     {
         return $this->belongsTo('App\Payment');
     }
+
     public function user_invoices()
     {
         return $this->hasMany('App\Invoice')->where(['user_id' => Auth::id(), 'admin_show' => 1]);
@@ -88,11 +90,21 @@ class Client extends Model
 
     public function uptodate($request)
     {
-        $this->update(['name' => $request->name,
-            'email' => $request->email,
-            'payment_method_id' => $request->payment_method,
-            'billing_info' => $request->billing_info,
-            'admin_show' => 1]);
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'unique:clients,email,' . $this->id
+        ]);
+        if ($validator->fails()) {
+            $check = 1;
+        } else {
+            $this->update(['name' => $request->name,
+                'email' => $request->email,
+                'payment_method_id' => $request->payment_method,
+                'billing_info' => $request->billing_info,
+                'admin_show' => 1]);
+            $check = 0;
+        }
+        return $check;
     }
 
     public function deletion($id)
@@ -105,9 +117,8 @@ class Client extends Model
         $task = count($this->user_tasks);
         $contact = count($this->user_contacts);
 
-        $check = $invoice && $task && $contact;
-
-        if (!$check) {
+        $check = empty($invoice) && empty($task) && empty($contact);
+        if ((bool) $check == true) {
             Client::destroy($id);
         }
         return $check;

@@ -33,12 +33,16 @@ class PaymentController extends Controller
 
     public function update(Request $request, $id)
     {
-        $payment = Payment::findOrFail($id);
-        $payment->uptodate($request);
-        return response()->json([
-            'url' => route('payment.index'),
-            'success' => 'record has been saved'
-        ]);
+        if ($id == null) {
+
+        } else {
+            $payment = Payment::findOrFail($id);
+            $payment->uptodate($request);
+            return response()->json([
+                'url' => route('payment.index'),
+                'success' => 'record has been saved'
+            ]);
+        }
     }
 
     public function destroy($id)

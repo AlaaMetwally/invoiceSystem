@@ -1,10 +1,9 @@
 <div class="page-content-body">
     <div class="row" style="margin-left:0; margin-right:10px;">
-        <form class="form-horizontal ajaxform"  method="POST"
+        <form class="form-horizontal ajaxform" method="POST"
               action="{{route('client.update',$client->id)}}">
             {{csrf_field()}}
             <input type="hidden" id="csrf-token" name="_token" value="{{ Session::token() }}">
-
             <div class="form-group">
                 <label for="name" class="col-md-4 control-label">Client Name<span style="color:red;">*</span></label>
                 <div class="col-md-6">
@@ -25,9 +24,9 @@
                     <p id="testrequired" style="color:red"></p>
                 </div>
                 <label for="name" class="col-md-4 control-label">Payment Method<span style="color:red;">*</span></label>
-                <div class="col-md-6">
-                    <select data-validation="select" name="payment_method" class="form-control m-input m-input--solid"
-                            id="clientmethod" style="padding-top: 5px;">
+                <div class="col-md-3">
+                    <select data-validation="select" name="payment_method" class="form-control m-input m-input--solid select"
+                            id="clientmethod" style="padding-top: 5px; display:block">
 
                         @foreach ($payments as $payment)
 
@@ -36,9 +35,20 @@
                                 {{$payment->name}}
                             </option>
                         @endforeach
-
                     </select>
                     <p id="testselect" style="color:red"></p>
+                    <input data-validation="" data-name="Payment" type="text" class="form-control addpayment" name="new_payment"
+                           style="display:none;">
+                    <div style="display:none;" class="cancel">
+                        <button type="button" class="btn btn-danger cancelAdd" style="margin-top:10px;">Cancel</button>
+                        <button data-input="new_payment" data-name="Payment" type="button"
+                                class="btn btn-success addStuff" style="margin-top:10px;margin-left:20px;">Add
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-warning addNew" type="button" value="add new" style="display: block">Add new
+                    </button>
                 </div>
             </div>
 

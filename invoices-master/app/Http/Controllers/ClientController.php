@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Client;
 use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
-use Validator;
 
 class ClientController extends Controller
 {
@@ -35,24 +34,24 @@ class ClientController extends Controller
     {
         $client = Client::findOrFail($id);
 
-        $validator = Validator::make($request->all(), $client->rules);
-        if ($validator->fails()) {
+        $check = $client->uptodate($request);
+        if ($check) {
             return response()->json([
                 'error' => 'email exists'
             ]);
+        } else {
+            return response()->json([
+                'url' => route('client.index'),
+                'success' => 'record has been saved'
+            ]);
         }
-        $client->uptodate($request);
-        return response()->json([
-            'url' => route('client.index'),
-            'success' => 'record has been saved'
-        ]);
     }
 
     public function destroy($id)
     {
         $client = Client::findOrFail($id);
         $check = $client->deletion($id);
-        if ($check) {
+        if (!$check) {
             return response()->json([
                 'error' => 'Record is related to other recorders in another tables!'
             ]);
