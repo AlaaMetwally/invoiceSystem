@@ -37,8 +37,9 @@
                         @endforeach
                     </select>
                     <p id="testselect" style="color:red"></p>
-                    <input data-validation="" data-name="Payment" type="text" class="form-control addpayment" name="new_payment"
+                    <input data-validation="name" id="new_payment" type="text" class="form-control addpayment" name="name"
                            style="display:none;">
+                           <p id="testpayment" style="color:red"></p>
                     <div style="display:none;" class="cancel">
                         <button type="button" class="btn btn-danger cancelAdd" style="margin-top:10px;">Cancel</button>
                         <button data-input="new_payment" data-name="Payment" type="button"
@@ -62,4 +63,3 @@
         </form>
     </div>
 </div>
-

@@ -33,8 +33,12 @@ class PaymentController extends Controller
 
     public function update(Request $request, $id)
     {
-        if ($id == null) {
-
+        if ($id == "null") {
+            $payment = Payment::create(['user_id' => Auth::id(),
+            'name' => $_POST['payment'],
+            'admin_show' => 1
+            ]);
+            return response()->json(['id' => $payment->id]);
         } else {
             $payment = Payment::findOrFail($id);
             $payment->uptodate($request);
