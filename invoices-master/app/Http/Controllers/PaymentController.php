@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Payment;
 use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
+use Validator;
 
 class PaymentController extends Controller
 {
@@ -34,11 +35,26 @@ class PaymentController extends Controller
     public function update(Request $request, $id)
     {
         if ($id == "null") {
-            $payment = Payment::create(['user_id' => Auth::id(),
-            'name' => $_POST['payment'],
-            'admin_show' => 1
-            ]);
-            return response()->json(['id' => $payment->id]);
+            if($_POST['payment']){
+                $validator = Validator::make($_POST, [
+                    'payment' => 'unique:payments,name,' . $id
+                ]);
+                if ($validator->fails()) {
+                    return response()->json([
+                        'error' => 'name exists'
+                    ]);
+                } else {
+                    $payment = Payment::create(['user_id' => Auth::id(),
+                        'name' => $_POST['payment'],
+                        'admin_show' => 1
+                    ]);
+                    return response()->json([
+                        'id' => $payment->id,
+                        'success' => 'record has been saved'
+                    ]);
+                }
+            }
+
         } else {
             $payment = Payment::findOrFail($id);
             $payment->uptodate($request);

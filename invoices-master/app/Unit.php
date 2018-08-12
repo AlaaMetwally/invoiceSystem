@@ -3,6 +3,7 @@
 namespace App;
 use Auth;
 use Illuminate\Database\Eloquent\Model;
+use Validator;
 
 class Unit extends Model
 {
@@ -14,11 +15,11 @@ class Unit extends Model
     ];
 
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','user_id');
     }
     public function task()
     {
-        return $this->hasMany('App\Task');
+        return $this->hasMany('App\Task','id');
     }
     public function user_tasks()
     {
@@ -50,7 +51,17 @@ class Unit extends Model
 
     public function uptodate($request)
     {
-        $this->update(['name' => $request->name, 'admin_show' => 1]);
+        $validator = Validator::make($request->all(), [
+            'name' => 'unique:units,name,' . $this->id
+        ]);
+        if ($validator->fails()) {
+            $check = 1;
+        } else {
+            $this->update(['name' => $request->name, 'admin_show' => 1]);
+            $check = 0;
+        }
+
+        return $check;
     }
 
     public function deletion($id)

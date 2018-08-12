@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Currency;
 use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
+use Validator;
 
 class CurrencyController extends Controller
 {
@@ -33,14 +34,36 @@ class CurrencyController extends Controller
 
     public function update(Request $request, $id)
     {
-        $currency = Currency::findOrFail($id);
-        $currency->uptodate($request);
-        return response()->json([
-            'url' => route('currency.index'),
-            'success' => 'record has been saved'
-        ]);
-    }
+        if ($id == "null") {
+            if ($_POST['data']) {
+                $validator = Validator::make($_POST, [
+                    'data' => 'unique:currencies,name,' . $id
+                ]);
+                if ($validator->fails()) {
+                    return response()->json([
+                        'error' => 'name exists'
+                    ]);
+                } else {
+                    $currency = Currency::create(['user_id' => Auth::id(),
+                        'name' => $_POST['data'],
+                        'admin_show' => 1
+                    ]);
+                    return response()->json([
+                        'id' => $currency->id,
+                        'success' => 'record has been saved'
+                    ]);
+                }
+            }
 
+        } else {
+            $currency = Currency::findOrFail($id);
+            $currency->uptodate($request);
+            return response()->json([
+                'url' => route('currency.index'),
+                'success' => 'record has been saved'
+            ]);
+        }
+    }
     public function destroy($id)
     {
         $currency = Currency::findOrFail($id);

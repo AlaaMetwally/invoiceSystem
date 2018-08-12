@@ -1,9 +1,10 @@
 <?php
 
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Validator;
+
 class Payment extends Model
 {
     //
@@ -16,7 +17,7 @@ class Payment extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','user_id');
     }
     public function user_clients()
     {
@@ -24,7 +25,7 @@ class Payment extends Model
     }
     public function client()
     {
-        return $this->hasMany('App\Client');
+        return $this->hasMany('App\Client','id');
     }
     public static function index()
     {
@@ -52,9 +53,19 @@ class Payment extends Model
 
     public function uptodate($request)
     {
-        $this->update(['name' => $request->name,
-        'info' => $request->info,
-        'admin_show' => 1]);
+            $validator = Validator::make($request->all(), [
+            'name' => 'unique:payments,name,' . $this->id
+            ]);
+            if ($validator->fails()) {
+                $check = 1;
+            } else {
+                $this->update(['name' => $request->name,
+                'info' => $request->info,
+                'admin_show' => 1]);
+                $check = 0;
+            }
+
+        return $check;
     }
 
     public function deletion($id)

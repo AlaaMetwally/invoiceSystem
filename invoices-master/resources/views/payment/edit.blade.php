@@ -9,14 +9,14 @@
                 <div class="col-md-6">
                     <input data-validation="name" id="payname" data-name="Payment Name" type="text"
                            class="form-control" name="name" value="{{$payment->name}}" autofocus="">
-                    <p id="testname" style="color:red"></p>
+                    <p class="testname" style="color:red"></p>
                 </div>
 
                 <label for="text" class="col-md-4 control-label">Payment Info<span style="color:red;">*</span></label>
                 <div class="col-md-6">
                     <textarea data-validation="required" id="payinfo" data-name="Payment Info"
                               class="form-control" name="info" autofocus="">{{$payment->info}}</textarea>
-                    <p id="testrequired" style="color:red"></p>
+                    <p class="testrequired" style="color:red"></p>
                 </div>
             </div>
 

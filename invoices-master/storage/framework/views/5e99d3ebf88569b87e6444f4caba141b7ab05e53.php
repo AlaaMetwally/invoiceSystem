@@ -10,42 +10,42 @@
                 <div class="col-md-6">
                     <input data-validation="name" id="clientname" data-name="Client Name" type="text"
                            class="form-control" name="name" value="<?php echo e($client->name); ?>" autofocus="">
-                    <p id="testname" style="color:red"></p>
+                    <p class="testname" style="color:red"></p>
                 </div>
                 <label for="name" class="col-md-4 control-label">Client Email<span style="color:red;">*</span></label>
                 <div class="col-md-6">
                     <input data-validation="email" id="clientemail" data-name="Client Email" type="text"
                            class="form-control" name="email" value="<?php echo e($client->email); ?>" autofocus="">
-                    <p id="testemail" style="color:red"></p>
+                    <p class="testemail" style="color:red"></p>
                 </div>
                 <label for="name" class="col-md-4 control-label">Billing Info<span style="color:red;">*</span></label>
                 <div class="col-md-6">
                     <textarea data-validation="required" id="clientinfo" data-name="Billing Info" type="text"
                               class="form-control" name="billing_info" autofocus=""><?php echo e($client->billing_info); ?></textarea>
-                    <p id="testrequired" style="color:red"></p>
+                    <p class="testrequired" style="color:red"></p>
                 </div>
                 <label for="name" class="col-md-4 control-label">Payment Method<span style="color:red;">*</span></label>
                 <div class="col-md-3">
-                    <select data-validation="select" name="payment_method" class="form-control m-input m-input--solid select"
+                    <select data-validation="select" name="payment" class="form-control m-input m-input--solid select"
                             id="clientmethod" style="padding-top: 5px; display:block">
-
+                        <option value="">Select Payment</option>
                         <?php $__currentLoopData = $payments; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $payment): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
                             <option value="<?php echo e($payment->id); ?>" name="payment_method" id="<?php echo e($payment->id); ?>"
-                                    <?php if($client->payment_method && $client->payment_method_id != $payment->id): ?>  selected <?php endif; ?>>
+                                    <?php if($client->payment_id == $payment->id): ?>  selected <?php endif; ?>>
                                 <?php echo e($payment->name); ?>
 
                             </option>
                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </select>
-                    <p id="testselect" style="color:red"></p>
-                    <input data-validation="name" id="new_payment" type="text" class="form-control addpayment" name="name"
+                    <p class="testselect" style="color:red"></p>
+
+                    <input value="<?php echo e($client->payment?$client->payment->name:''); ?>" data-validation="addname" id="new_payment" type="text" class="form-control addpayment" name="addname"
                            style="display:none;">
-                           <p id="testpayment" style="color:red"></p>
+                           <p class="testaddname" style="color:red"></p>
                     <div style="display:none;" class="cancel">
-                        <button type="button" class="btn btn-danger cancelAdd" style="margin-top:10px;">Cancel</button>
+                        <button type="button" data-name="<?php echo e($client->payment?$client->payment->name:''); ?>" class="btn btn-danger cancelAdd" style="margin-top:10px;">Cancel</button>
                         <button data-input="new_payment" data-name="Payment" type="button"
-                                class="btn btn-success addStuff" style="margin-top:10px;margin-left:20px;">Add
+                                class="btn btn-success" id="addStuff" style="margin-top:10px;margin-left:20px;">Add
                         </button>
                     </div>
                 </div>
@@ -65,3 +65,6 @@
         </form>
     </div>
 </div>
+
+
+

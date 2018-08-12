@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Service;
 use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
+use Validator;
 
 class ServiceController extends Controller
 {
@@ -33,12 +34,35 @@ class ServiceController extends Controller
 
     public function update(Request $request, $id)
     {
-        $service = Service::findOrFail($id);
-        $service->uptodate($request);
-        return response()->json([
-            'url' => route('service.index'),
-            'success' => 'record has been saved'
-        ]);
+        if ($id == "null") {
+            if ($_POST['data']) {
+                $validator = Validator::make($_POST, [
+                    'data' => 'unique:services,name,' . $id
+                ]);
+                if ($validator->fails()) {
+                    return response()->json([
+                        'error' => 'name exists'
+                    ]);
+                } else {
+                    $service = Service::create(['user_id' => Auth::id(),
+                        'name' => $_POST['data'],
+                        'admin_show' => 1
+                    ]);
+                    return response()->json([
+                        'id' => $service->id,
+                        'success' => 'record has been saved'
+                    ]);
+                }
+            }
+
+        } else {
+            $service = Service::findOrFail($id);
+            $service->uptodate($request);
+            return response()->json([
+                'url' => route('service.index'),
+                'success' => 'record has been saved'
+            ]);
+        }
     }
 
     public function destroy($id)

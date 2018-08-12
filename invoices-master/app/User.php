@@ -32,34 +32,34 @@ class User extends Authenticatable
     ];
     public function clients()
     {
-        return $this->hasMany('App\Client');
+        return $this->hasMany('App\Client','id');
     }
     public function services()
     {
-        return $this->hasMany('App\Service');
+        return $this->hasMany('App\Service','id');
     }
     public function payments()
     {
-        return $this->hasMany('App\Payment');
+        return $this->hasMany('App\Payment','id');
     }
     public function currencies()
     {
-        return $this->hasMany('App\Currency');
+        return $this->hasMany('App\Currency','id');
     }
     public function units()
     {
-        return $this->hasMany('App\Unit');
+        return $this->hasMany('App\Unit','id');
     }
     public function tasks()
     {
-        return $this->hasMany('App\Task');
+        return $this->hasMany('App\Task','id');
     }
     public function adjustments()
     {
-        return $this->hasMany('App\Adjustment');
+        return $this->hasMany('App\Adjustment','id');
     }
     public function invoices()
     {
-        return $this->hasMany('App\Invoice');
+        return $this->hasMany('App\Invoice','id');
     }
 }

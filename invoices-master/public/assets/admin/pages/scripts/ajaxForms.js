@@ -6,7 +6,6 @@ $(document).on('ready pjax:success', function () {
         }
     });
     $('.ajaxform').ajaxForm({
-        beforeSerialize: beforeSerialize,
         beforeSubmit: beforeSaving,
         success: function (data) {
             if (data.url) {
@@ -18,15 +17,13 @@ $(document).on('ready pjax:success', function () {
             else {
                 $.magnificPopup.close();
             }
+        },
+        error:function(response){
+            console.log(response)
         }
     });
 });
 
-function beforeSerialize() {
-    if (typeof ajaxformbeforeSerialize !== "undefined") {
-        ajaxformbeforeSerialize();
-    }
-}
 
 function validateRegex(arr, $form, options) {
     var i;
@@ -52,12 +49,23 @@ function beforeSaving(arr, $form, options) {
     var i;
     var check = true;
     for (i = 0; i < arr.length; i++) {
-        $input = $('[name=' + arr[i].name + ']');
+        input_name =  arr[i].name;
+        $input = $('[name=' + input_name + ']');
         $validation_rule = $input.attr('data-validation');
+        // if($("select option").filter(function() {
+        //     return this.value;
+        // }).length === 0){
+        //     document.getElementById('testselect').innerHTML = "add new option";
+        //     return false;
+        // }
 
         if ($validation_rule == "name") {
             var name = $input.val();
             check = nameValidate(name, check);
+        }
+        else if ($validation_rule == "number") {
+            var number = $input.val();
+            check = numberValidate(number, check);
         }
         else if ($validation_rule == "email") {
             var email = $input.val();
@@ -77,34 +85,73 @@ function beforeSaving(arr, $form, options) {
         }
         else if ($validation_rule == "select") {
             var select = $input.val();
-            check = selectValidate(select, check);
+            var select_name = input_name;
+
+            check = selectValidate(select, check,select_name,$input.is(":hidden"));
+        }
+        else if ($validation_rule == "addname") {
+            var addname = $input.val();
+            check = addnameValidate(addname, check,$input);
         }
     }
     return check;
 }
-
+function numberValidate(number, check) {
+    var numberRegex = /^[0-9]+$/;
+    var numberResult = numberRegex.test(number);
+    if (numberResult == true) {
+        $('.testnumber').hide();
+        return check;
+    }
+    else {
+        $('.testnumber').text("number invalid");
+        return false;
+    }
+}
 function nameValidate(name, check) {
     var nameRegex = /^[A-Za-z ]+$/;
     var nameResult = nameRegex.test(name);
     if (nameResult == true) {
-        document.getElementById('testname').innerHTML = "";
+        $('.testname').hide();
         return check;
     }
     else {
-        document.getElementById('testname').innerHTML = "name invalid";
+        $('.testname').show();
+        $('.testname').text("name invalid");
         return false;
     }
 }
+function addnameValidate(addname, check,inputcheck) {
+    var nameRegex = /^[A-Za-z ]+$/;
+    var nameResult = nameRegex.test(addname);
+    var hidden = inputcheck.is(":hidden")
+    var show = inputcheck.closest('div').find('.testaddname')
 
+    if(nameResult == true && !hidden){
+        show.hide()
+        inputcheck.closest('div').find('.testselect').show()
+        inputcheck.closest('div').find('.testselect').text("please click on add")
+    }
+    else if (nameResult == true || hidden) {
+        show.hide()
+        return check;
+    }
+    else if(nameResult == false || !hidden) {
+        show.text("name invalid");
+        show.show()
+        return false;
+    }
+
+}
 function emailValidate(email, check) {
     var emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
     var emailResult = emailRegex.test(email);
     if (emailResult == true) {
-        document.getElementById('testemail').innerHTML = "";
+        $('.testemail').hide();
         return check;
     }
     else {
-        document.getElementById('testemail').innerHTML = "email invalid";
+        $('.testemail').text("email invalid");
         return false;
     }
 
@@ -116,11 +163,11 @@ function requiredValidate(text, check) {
     var addressResult = addressRegex.test(text);
 
     if (addressResult == true) {
-        document.getElementById('testrequired').innerHTML = "";
+        $('.testrequired').hide();
         return check;
     }
     else {
-        document.getElementById('testrequired').innerHTML = "text invalid";
+        $('.testrequired').text("text invalid");
         return false;
     }
 
@@ -128,11 +175,11 @@ function requiredValidate(text, check) {
 
 function countryValidate(country, check) {
     if (country != -1 && country) {
-        document.getElementById('testcountry').innerHTML = "";
+        $('.testcountry').hide();
         return check;
     }
     else {
-        document.getElementById('testcountry').innerHTML = "country invalid";
+        $('.testcountry').text("country invalid");
         return false;
     }
 
@@ -140,22 +187,24 @@ function countryValidate(country, check) {
 
 function cityValidate(city, check) {
     if (city) {
-        document.getElementById('testcity').innerHTML = "";
+        $('.testcity').hide();
         return check;
     }
     else {
-        document.getElementById('testcity').innerHTML = "city invalid";
+        $('.testcity').text("city invalid");
         return false;
     }
 }
 
-function selectValidate(select, check) {
-    if (select) {
-        document.getElementById('testselect').innerHTML = "";
+function selectValidate(select, check, select_name,hidden) {
+    if (select || hidden) {
+        $('[name=' + select_name + ']').next('p').hide();
         return check;
     }
     else {
-        document.getElementById('testselect').innerHTML = "please select one of the options";
+        $('[name=' + select_name + ']').next('p').show();
+        $('[name=' + select_name + ']').next('p').text("please select one of the options")
+        $('[name=' + select_name + ']').closest('div').find('.testaddname').hide(); //input
         return false;
     }
 }

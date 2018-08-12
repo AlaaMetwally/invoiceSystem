@@ -19,12 +19,12 @@ class Adjustment extends Model
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','user_id');
     }
 
     public function invoice()
     {
-        return $this->hasMany('App\Invoice');
+        return $this->hasMany('App\Invoice','id');
     }
 
     public function user_invoices()

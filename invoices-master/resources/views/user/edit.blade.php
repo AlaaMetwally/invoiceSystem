@@ -26,7 +26,7 @@
                     <input type="text" data-validation="name" name="name" class="form-control m-input m-input--solid"
                            id="name"
                            value="{{$user->name}}">
-                    <p id="testname" style="color:red"></p>
+                    <p class="testname" style="color:red"></p>
                 </div>
                 <div class="form-group m-form__group">
                     <label for="email">
@@ -35,7 +35,7 @@
                     <input type="email" data-validation="email" name="email" class="form-control m-input m-input--solid"
                            id="email"
                            value="{{$user->email}}">
-                    <p id="testemail" style="color:red"></p>
+                    <p class="testemail" style="color:red"></p>
 
                 </div>
                 <div class="form-group m-form__group">
@@ -53,7 +53,7 @@
                     <textarea data-validation="required" name="address" class="form-control m-input m-input--solid"
                               id="address"
                               rows="3">{{$user->address}}</textarea>
-                    <p id="testaddress" style="color:red"></p>
+                    <p class="testaddress" style="color:red"></p>
                 </div>
                 <div class="form-group m-form__group">
                     <label for="country">
@@ -64,7 +64,7 @@
                             data-default-value="{{$user->country}}" style="padding-top: 5px;">
 
                     </select>
-                    <p id="testcountry" style="color:red"></p>
+                    <p class="testcountry" style="color:red"></p>
                 </div>
                 <div class="form-group m-form__group">
                     <label for="city">
@@ -74,7 +74,7 @@
                             data-default-value="{{$user->city}}" style="padding-top: 5px;">
 
                     </select>
-                    <p id="testcity" style="color:red"></p>
+                    <p class="testcity" style="color:red"></p>
                 </div>
 
                 <button type="button" class="btn btn-primary popup" data-toggle="modal" data-target="#m_modal_1"

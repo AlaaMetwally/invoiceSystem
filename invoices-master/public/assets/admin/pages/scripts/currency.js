@@ -20,7 +20,7 @@ $(document).on('ready pjax:success', function () {
             function () {
                 $.ajax(
                     {
-                        url: "currency/" + id,
+                        url: "/currency/" + id,
                         type: 'delete',
                         dataType: "JSON",
                         data: {

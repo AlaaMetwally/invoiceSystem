@@ -1,4 +1,4 @@
-$(document).on('ready pjax:success', function () {
+$(document).on('ready', function (e) {
     var table = $('#clients-table').DataTable({
         "columnDefs": [
             { "orderable": false, "searchable": false, "targets": 1 }
@@ -9,18 +9,18 @@ $(document).on('ready pjax:success', function () {
         $tr = $(this).parents('tr');
         var id = e.target.id;
         swal({
-            title: "Are you sure?",
-            text: "You won't be able to revert this!",
-            type: "warning",
-            showCancelButton: true,
-            confirmButtonClass: "btn-danger",
-            confirmButtonText: "Yes, delete it!",
-            closeOnConfirm: false
-        },
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-danger",
+                confirmButtonText: "Yes, delete it!",
+                closeOnConfirm: false
+            },
             function () {
                 $.ajax(
                     {
-                        url: "client/" + id,
+                        url: "/client/" + id,
                         type: 'delete',
                         dataType: "JSON",
                         data: {
@@ -48,16 +48,14 @@ $(document).on('ready pjax:success', function () {
         $(".addpayment").show();
         $(".cancel").show();
     })
-    $(document).on('click', '.cancel', function (e) {
-        document.getElementById('testpayment').innerHTML = "";
+    $(document).on('click', '.cancelAdd', function (e) {
+        $('.testpayment').hide();
         $(".addNew").show();
         $(".select").show();
-        $("#testselect").show();
         $(".addpayment").hide();
         $(".cancel").hide();
     })
-    $(document).on('click', '.addStuff', function (e) {
-        document.getElementById('testpayment').innerHTML = "";
+    $(document).on('click', '#addStuff', function (e) {
         var new_payment = document.getElementById('new_payment').value;
         var nameRegex = /^[a-zA-Z ]+$/;
         var nameResult = nameRegex.test(new_payment);
@@ -70,10 +68,24 @@ $(document).on('ready pjax:success', function () {
                     },
                     type: "POST",
                     success: function (response) {
-                        var option = $("<option selected></option>");
-                        option.text(new_payment);
-                        option.attr("id", response.id);
-                        $("select").append(option);
+                        console.log(response)
+                        if(response.error){
+                            $('.testpayment').show();
+                            $('.testpayment').text('Name exists');
+                        } else if(response.success){
+
+                            $(".addNew").show();
+                            $(".select").show();
+                            $(".addpayment").hide();
+                            $(".cancel").hide();
+                            $('.testpayment').hide();
+                            var option = $("<option selected name='payment_method'></option>");
+                            option.text(new_payment);
+                            option.attr("id", response.id);
+                            option.attr("value",response.id);
+                            $("select").append(option);
+
+                        }
                     },
                     error: function (xhr) {
                         console.log(xhr);
@@ -81,7 +93,8 @@ $(document).on('ready pjax:success', function () {
                 });
         }
         else {
-            document.getElementById('testpayment').innerHTML = "name invalid";
+            $(".testpayment").show();
+            $('.testpayment').text('name invalid');
             return false;
         }
     })

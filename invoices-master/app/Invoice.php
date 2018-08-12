@@ -12,15 +12,19 @@ class Invoice extends Model
     ];
 
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','user_id');
     }
     public function client()
     {
-        return $this->belongsTo('App\Client');
+        return $this->belongsTo('App\Client','client_id');
     }
 
     public function adjustment()
     {
-        return $this->belongsTo('App\Adjustment');
+        return $this->belongsTo('App\Adjustment','adjustment_id');
+    }
+
+    public function tasks(){
+        return $this->hasMany('App\Task', 'id');
     }
 }

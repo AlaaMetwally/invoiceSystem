@@ -33,7 +33,6 @@ class ClientController extends Controller
     public function update(Request $request, $id)
     {
         $client = Client::findOrFail($id);
-
         $check = $client->uptodate($request);
         if ($check) {
             return response()->json([

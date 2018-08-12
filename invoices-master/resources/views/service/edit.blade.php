@@ -9,13 +9,13 @@
                 <div class="col-md-6">
                     <input data-validation="name" id="servicename" data-name="Service Name" type="text"
                            class="form-control" name="name" value="{{$service->name}}" autofocus="">
-                    <p id="testname" style="color:red"></p>
+                    <p class="testname" style="color:red"></p>
                 </div>
                 <label for="text" class="col-md-4 control-label">Service Description<span style="color:red;">*</span></label>
                 <div class="col-md-6">
                     <textarea data-validation="required" id="serviceinfo" data-name="Service Info"
                               class="form-control" name="info" autofocus="">{{$service->description}}</textarea>
-                    <p id="testrequired" style="color:red"></p>
+                    <p class="testrequired" style="color:red"></p>
                 </div>
             </div>
 

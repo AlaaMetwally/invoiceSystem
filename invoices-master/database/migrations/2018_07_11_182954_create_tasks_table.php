@@ -18,6 +18,9 @@ class CreateTasksTable extends Migration
 
             $table->integer('service_id')->unsigned()->nullable();
             $table->foreign('service_id')->references('id')->on('services');
+            
+            $table->integer('invoice_number_id')->unsigned()->nullable();
+            $table->foreign('invoice_number_id')->references('id')->on('invoices');
 
             $table->integer('client_id')->unsigned()->nullable();
             $table->foreign('client_id')->references('id')->on('clients');
@@ -25,10 +28,8 @@ class CreateTasksTable extends Migration
             $table->integer('contact_id')->unsigned()->nullable();
             $table->foreign('contact_id')->references('id')->on('contacts');
 
-            $table->string('invoice_number')->nullable();
-
             $table->integer('currency_id')->unsigned()->nullable();
-            $table->foreign('currency_id')->references('id')->on('clients');
+            $table->foreign('currency_id')->references('id')->on('currencies');
 
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users');

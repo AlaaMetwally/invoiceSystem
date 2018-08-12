@@ -10,10 +10,10 @@
         <div><span class="Title">City : </span><span class="title_info">{{$user->city}}</span></div>
         <hr>
 
-        <img src="{{ asset("storage$user->logo") }}"></img>
+        <img style="width: 500px;height: 300px;" src="{{ asset("storage$user->logo") }}"></img>
         <br>
         <div>
-            <a href="{{route('user.edit',$user->id)}}" class="btn btn-warning btn-sm pjax-link" data-id="{{$user->id}}">
+            <a href="{{route('user.edit',$user->id)}}" style="margin-top: 10px;" class="btn btn-warning btn-sm pjax-link" data-id="{{$user->id}}">
                 Edit <i class="fa fa-edit"></i>
             </a>
         </div>

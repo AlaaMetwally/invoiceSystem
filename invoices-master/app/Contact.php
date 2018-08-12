@@ -12,12 +12,12 @@ class Contact extends Model
 
     public function task()
     {
-        return $this->hasMany('App\Task');
+        return $this->hasMany('App\Task','id');
     }
 
     public function client()
     {
-        return $this->belongsTo('App\Client');
+        return $this->belongsTo('App\Client','client_id');
     }
 
     public function user_tasks()

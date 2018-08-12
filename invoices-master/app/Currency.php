@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Validator;
+
 class Currency extends Model
 {
 
@@ -14,11 +16,11 @@ class Currency extends Model
     ];
 
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','user_id');
     }
     public function task()
     {
-        return $this->hasMany('App\Task');
+        return $this->hasMany('App\Task','id');
     }
     public function user_tasks()
     {
@@ -29,7 +31,7 @@ class Currency extends Model
         $data = [];
         $currencies = Currency::where('user_id', Auth::id())
             ->where('admin_show',1)
-            ->get();//admin_show
+            ->get();
         $data['currencies'] = $currencies;
         return $data;
     }
@@ -50,7 +52,18 @@ class Currency extends Model
 
     public function uptodate($request)
     {
-        $this->update(['name' => $request->name, 'admin_show' => 1]);
+        $validator = Validator::make($request->all(), [
+            'name' => 'unique:currencies,name,' . $this->id
+        ]);
+        if ($validator->fails()) {
+            $check = 1;
+        } else {
+            $this->update(['name' => $request->name, 'admin_show' => 1]);
+            $check = 0;
+        }
+
+        return $check;
+
     }
 
     public function deletion($id)

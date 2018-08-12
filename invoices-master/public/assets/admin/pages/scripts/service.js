@@ -20,7 +20,7 @@ $(document).on('ready pjax:success', function () {
             function () {
                 $.ajax(
                     {
-                        url: "service/" + id,
+                        url: "/service/" + id,
                         type: 'delete',
                         dataType: "JSON",
                         data: {

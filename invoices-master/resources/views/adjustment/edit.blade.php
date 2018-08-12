@@ -9,7 +9,7 @@
                 <div class="col-md-6">
                     <input data-validation="name" id="adjustname" data-name="Adjustment Name" type="text"
                            class="form-control" name="name" value="{{$adjustment->name}}" autofocus="">
-                    <p id="testname" style="color:red"></p>
+                    <p class="testname" style="color:red"></p>
                 </div>
             </div>
 

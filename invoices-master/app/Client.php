@@ -15,34 +15,34 @@ class Client extends Model
         'name',
         'email',
         'billing_info',
-        'payment_method_id',
+        'payment_id',
         'admin_show',
         'user_id'
     ];
 
     public function user()
     {
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','user_id');
     }
 
     public function invoice()
     {
-        return $this->hasMany('App\Invoice');
+        return $this->hasMany('App\Invoice','id');
     }
 
     public function task()
     {
-        return $this->hasMany('App\Task');
+        return $this->hasMany('App\Task','id');
     }
 
     public function contact()
     {
-        return $this->hasMany('App\Contact');
+        return $this->hasMany('App\Contact','id');
     }
 
     public function payment()
     {
-        return $this->belongsTo('App\Payment');
+        return $this->belongsTo('App\Payment','payment_id');
     }
 
     public function user_invoices()
@@ -98,7 +98,7 @@ class Client extends Model
         } else {
             $this->update(['name' => $request->name,
                 'email' => $request->email,
-                'payment_method_id' => $request->payment_method,
+                'payment_id' => $request->payment,
                 'billing_info' => $request->billing_info,
                 'admin_show' => 1]);
             $check = 0;

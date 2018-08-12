@@ -55,15 +55,10 @@ class UserController extends Controller
         $pathname = $request->file('pathname')->getClientOriginalName();
         $path = $request->file('pathname');
         $img = Image::make($path);
-
         $x = (integer)json_decode($request->dataimage)->x;
         $y = (integer)json_decode($request->dataimage)->y;
-        $width = (integer)json_decode($request->dataimage)->width;
-        $height = (integer)json_decode($request->dataimage)->height;
-        $top = (integer)json_decode($request->dataimage)->top;
-        $bottom = (integer)json_decode($request->dataimage)->bottom;
-        $right = (integer)json_decode($request->dataimage)->right;
-        $left = (integer)json_decode($request->dataimage)->left;
+        $width = (integer)json_decode($request->dataimage)->w;
+        $height = (integer)json_decode($request->dataimage)->h;
 
         $img->crop($width, $height, $x, $y);
         $imageName = '/uploads/users/' . time() . '_' . $pathname;

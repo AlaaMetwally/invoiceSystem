@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Unit;
 use Illuminate\Support\Facades\Auth;
 use Yajra\Datatables\Datatables;
-
+use Validator;
 class UnitController extends Controller
 {
     //
@@ -33,12 +33,35 @@ class UnitController extends Controller
 
     public function update(Request $request, $id)
     {
-        $unit = Unit::findOrFail($id);
-        $unit->uptodate($request);
-        return response()->json([
-            'url' => route('unit.index'),
-            'success' => 'record has been saved'
-        ]);
+        if ($id == "null") {
+            if ($_POST['data']) {
+                $validator = Validator::make($_POST, [
+                    'data' => 'unique:units,name,' . $id
+                ]);
+                if ($validator->fails()) {
+                    return response()->json([
+                        'error' => 'name exists'
+                    ]);
+                } else {
+                    $unit= Unit::create(['user_id' => Auth::id(),
+                        'name' => $_POST['data'],
+                        'admin_show' => 1
+                    ]);
+                    return response()->json([
+                        'id' => $unit->id,
+                        'success' => 'record has been saved'
+                    ]);
+                }
+            }
+
+        } else {
+            $unit = Unit::findOrFail($id);
+            $unit->uptodate($request);
+            return response()->json([
+                'url' => route('unit.index'),
+                'success' => 'record has been saved'
+            ]);
+        }
     }
 
     public function destroy($id)

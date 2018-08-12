@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Auth;
+use Validator;
 
 class Service extends Model
 {
@@ -16,11 +17,11 @@ class Service extends Model
     ];
 
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->belongsTo('App\User','user_id');
     }
     public function task()
     {
-        return $this->hasMany('App\Task');
+        return $this->hasMany('App\Task','service_id');
     }
     public function user_tasks()
     {
@@ -52,9 +53,19 @@ class Service extends Model
 
     public function uptodate($request)
     {
-        $this->update(['name' => $request->name,
-        'description' => $request->info,
-        'admin_show' => 1]);
+        $validator = Validator::make($request->all(), [
+            'name' => 'unique:services,name,' . $this->id
+        ]);
+        if ($validator->fails()) {
+            $check = 1;
+        } else {
+            $this->update(['name' => $request->name,
+                'description' => $request->info,
+                'admin_show' => 1]);
+            $check = 0;
+        }
+
+        return $check;
     }
 
     public function deletion($id)
